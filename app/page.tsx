@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { SectionContainer } from "@/components/section-container"
 import { ProjectCard } from "@/components/project-card"
-import { TechBadge } from "@/components/tech-badge"
+import { SkillsCarousel } from "@/components/skills-carousel"
 import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
 import { projects, skills, profile } from "@/lib/data"
@@ -75,6 +75,25 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Skills Section - ongoing carousel (Aave-style) - first after hero */}
+      <SectionContainer className="relative bg-muted/20">
+        <AnimatedSection className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+            Skills & technologies.
+          </h2>
+          <div className="mt-4 flex justify-center text-primary">
+            <DrawingLine width="80px" strokeWidth={2} />
+          </div>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            The tools and technologies I use to bring ideas to life.
+          </p>
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <SkillsCarousel skills={skills.flatMap((g) => g.items)} />
+        </AnimatedSection>
+      </SectionContainer>
 
       {/* What I Do Section - scroll-triggered reveal + line draw (SVGator) */}
       <SectionContainer className="relative">
@@ -150,40 +169,6 @@ export default function HomePage() {
               <ArrowRight className="h-5 w-5" />
             </Link>
           </Button>
-        </div>
-      </SectionContainer>
-
-      {/* Skills Section - scroll-triggered reveal + line draw */}
-      <SectionContainer className="relative bg-muted/20">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            Skills & technologies.
-          </h2>
-          <div className="mt-4 flex justify-center text-primary">
-            <DrawingLine width="80px" strokeWidth={2} />
-          </div>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            The tools and technologies I use to bring ideas to life.
-          </p>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skills.map((skillGroup, i) => (
-            <AnimatedSection key={skillGroup.category} delay={100 * (i + 1)}>
-              <div 
-                className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/30 hover:border-primary/20 hover-lift transition-all duration-300"
-              >
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-5">
-                  {skillGroup.category}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {skillGroup.items.map((skill) => (
-                    <TechBadge key={skill}>{skill}</TechBadge>
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-          ))}
         </div>
       </SectionContainer>
 

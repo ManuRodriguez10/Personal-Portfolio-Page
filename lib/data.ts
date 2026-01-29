@@ -57,7 +57,7 @@ export const skills = [
   { category: "Languages", items: ["Python", "Java", "JavaScript", "HTML", "CSS"] },
   { category: "Frontend", items: ["React"] },
   { category: "Backend", items: ["Django", "SQL", "Supabase"] },
-  { category: "Tools", items: ["Google Workspace", "Microsoft Office Suite"] },
+  { category: "Tools", items: ["Cursor", "Google Workspace", "Microsoft Office Suite"] },
 ]
 
 export const experience = [
