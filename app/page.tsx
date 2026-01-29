@@ -26,12 +26,23 @@ export default function HomePage() {
               <span className="text-sm font-medium text-primary">Available for new opportunities</span>
             </div>
 
-            {/* Main heading - staggered words + drawing line (SVGator-style) */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance">
-              <span className="inline-block animate-fade-in-up delay-100 text-foreground">Building </span>
-              <span className="inline-block animate-fade-in-up delay-200 text-primary">exceptional</span>
-              <br />
-              <span className="inline-block animate-fade-in-up delay-300 text-foreground">digital experiences.</span>
+            {/* Main heading - gradient text via SVG (reliable cross-browser) */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Building exceptional digital experiences.">
+              <svg viewBox="0 0 700 140" className="w-full max-w-4xl" preserveAspectRatio="xMinYMid meet">
+                <defs>
+                  <linearGradient id="hero-title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="var(--foreground)" />
+                    <stop offset="50%" stopColor="var(--primary)" />
+                    <stop offset="100%" stopColor="var(--foreground)" />
+                  </linearGradient>
+                </defs>
+                <text x="0" y="52" fill="url(#hero-title-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
+                  Building exceptional
+                </text>
+                <text x="0" y="110" fill="url(#hero-title-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
+                  digital experiences.
+                </text>
+              </svg>
             </h1>
             <div className="mt-6 animate-fade-in-up delay-350 text-primary">
               <DrawingLine width="120px" strokeWidth={2} />
