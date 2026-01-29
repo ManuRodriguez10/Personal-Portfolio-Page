@@ -11,7 +11,7 @@ import { DynamicBackground } from '@/components/dynamic-background'
 const _inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '[Your Name] | Software Engineer',
+  title: 'Manuel Rodriguez',
   description: 'Software engineer building accessible, pixel-perfect digital experiences for the web.',
   generator: 'v0.app',
   icons: {

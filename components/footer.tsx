@@ -1,11 +1,11 @@
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
+import { profile } from "@/lib/data"
 
 const socialLinks = [
-  { label: "GitHub", href: "#github-placeholder", icon: Github },
-  { label: "LinkedIn", href: "#linkedin-placeholder", icon: Linkedin },
-  { label: "Twitter", href: "#twitter-placeholder", icon: Twitter },
-  { label: "Email", href: "mailto:placeholder@example.com", icon: Mail },
+  { label: "GitHub", href: profile.githubUrl, icon: Github },
+  { label: "LinkedIn", href: profile.linkedinUrl, icon: Linkedin },
+  { label: "Email", href: `mailto:${profile.email}`, icon: Mail },
 ]
 
 const footerLinks = [
@@ -23,12 +23,12 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                <span className="text-lg font-bold text-primary">Y</span>
+                <span className="text-lg font-bold text-primary">M</span>
               </div>
-              <span className="text-lg font-semibold text-foreground">Your Name</span>
+              <span className="text-lg font-semibold text-foreground">{profile.fullName}</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Building exceptional digital experiences with modern technologies.
+              Building modern, clean web experiences with a focus on frontend and UI/UX.
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground/70">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
+            © {new Date().getFullYear()} {profile.fullName}. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground/70">
             Built with Next.js & Tailwind CSS

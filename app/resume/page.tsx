@@ -1,12 +1,13 @@
+import Link from "next/link"
 import { SectionContainer } from "@/components/section-container"
 import { TechBadge } from "@/components/tech-badge"
 import { Button } from "@/components/ui/button"
-import { experience, education, skills } from "@/lib/data"
-import { Download, ExternalLink, Briefcase, GraduationCap, FileText, Github, Linkedin, Globe } from "lucide-react"
+import { experience, education, skills, profile, relatedCourses, languages } from "@/lib/data"
+import { Download, Briefcase, GraduationCap, FileText, Github, Linkedin, Globe, BookOpen, Languages } from "lucide-react"
 
 export const metadata = {
-  title: "Resume | Your Name",
-  description: "My professional experience, education, and skills as a software engineer.",
+  title: `Resume | ${profile.fullName}`,
+  description: `Professional experience, education, and skills — ${profile.title} at New College of Florida.`,
 }
 
 export default function ResumePage() {
@@ -36,18 +37,18 @@ export default function ResumePage() {
               </p>
             </div>
             <Button asChild size="lg" className="h-14 px-8 rounded-xl gap-2 shadow-lg shadow-primary/25 w-full sm:w-auto">
-              <a href="#resume-placeholder" download>
+              <Link href="/resume">
                 <Download className="h-5 w-5" />
-                Download PDF
-              </a>
+                View Resume
+              </Link>
             </Button>
           </div>
 
           {/* Quick stats */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { value: "5+", label: "Years Experience" },
-              { value: "50+", label: "Projects Completed" },
+              { value: "May 2026", label: "Expected Graduation" },
+              { value: "4", label: "Projects Completed" },
               { value: "20+", label: "Technologies" },
             ].map((stat) => (
               <div key={stat.label} className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/30 text-center">
@@ -66,24 +67,26 @@ export default function ResumePage() {
           <div className="p-8 sm:p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-b border-border/30">
             <div className="max-w-3xl mx-auto text-center">
               <div className="flex h-20 w-20 mx-auto items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
-                <span className="text-3xl font-bold text-primary">YN</span>
+                <span className="text-3xl font-bold text-primary">MR</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-                Your Name
+                {profile.fullName}
               </h2>
-              <p className="mt-2 text-xl text-primary font-medium">Software Engineer</p>
+              <p className="mt-2 text-xl text-primary font-medium">{profile.title}</p>
               <p className="mt-3 text-muted-foreground">
-                San Francisco, CA • hello@example.com • (555) 123-4567
+                {profile.address} • {profile.email} • {profile.phone}
               </p>
               <div className="mt-6 flex items-center justify-center gap-3">
                 {[
-                  { icon: Github, label: "GitHub", href: "#github" },
-                  { icon: Linkedin, label: "LinkedIn", href: "#linkedin" },
-                  { icon: Globe, label: "Portfolio", href: "#portfolio" },
+                  { icon: Github, label: "GitHub", href: profile.githubUrl },
+                  { icon: Linkedin, label: "LinkedIn", href: profile.linkedinUrl },
+                  { icon: Globe, label: "Portfolio", href: "/" },
                 ].map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
                     aria-label={link.label}
                   >
@@ -98,7 +101,7 @@ export default function ResumePage() {
           <div className="p-8 sm:p-12 border-b border-border/30">
             <h3 className="text-xl font-semibold text-foreground mb-4">Summary</h3>
             <p className="text-muted-foreground leading-relaxed max-w-3xl">
-              {"Software engineer with 5+ years of experience building scalable web applications. Passionate about creating elegant solutions to complex problems and delivering exceptional user experiences. Strong background in React, TypeScript, and cloud architecture."}
+              {profile.longBio}
             </p>
           </div>
 
@@ -153,7 +156,7 @@ export default function ResumePage() {
           </div>
 
           {/* Skills */}
-          <div className="p-8 sm:p-12">
+          <div className="p-8 sm:p-12 border-b border-border/30">
             <h3 className="text-xl font-semibold text-foreground mb-8">Technical Skills</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {skills.map((skillGroup) => (
@@ -166,6 +169,39 @@ export default function ResumePage() {
                       <TechBadge key={skill}>{skill}</TechBadge>
                     ))}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Related Courses */}
+          <div className="p-8 sm:p-12 border-b border-border/30">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                <BookOpen className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">Related Courses</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {relatedCourses.map((course) => (
+                <TechBadge key={course}>{course}</TechBadge>
+              ))}
+            </div>
+          </div>
+
+          {/* Languages */}
+          <div className="p-8 sm:p-12">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                <Languages className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">Languages</h3>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {languages.map((lang) => (
+                <div key={lang.language} className="flex items-center gap-2">
+                  <span className="font-medium text-foreground">{lang.language}</span>
+                  <span className="text-muted-foreground">— {lang.proficiency}</span>
                 </div>
               ))}
             </div>

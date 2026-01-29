@@ -3,7 +3,7 @@ import Link from "next/link"
 import { SectionContainer } from "@/components/section-container"
 import { TechBadge } from "@/components/tech-badge"
 import { Button } from "@/components/ui/button"
-import { projects } from "@/lib/data"
+import { projects, profile } from "@/lib/data"
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Layers } from "lucide-react"
 
 interface ProjectPageProps {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   }
 
   return {
-    title: `${project.title} | Your Name`,
+    title: `${project.title} | ${profile.fullName}`,
     description: project.description,
   }
 }

@@ -5,7 +5,7 @@ import { ProjectCard } from "@/components/project-card"
 import { TechBadge } from "@/components/tech-badge"
 import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
-import { projects, skills } from "@/lib/data"
+import { projects, skills, profile } from "@/lib/data"
 import { ArrowRight, Download, Mail, Github, Linkedin, Sparkles, Code2, Palette, Zap } from "lucide-react"
 
 export default function HomePage() {
@@ -38,7 +38,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-8 text-xl text-muted-foreground leading-relaxed max-w-2xl animate-fade-in-up delay-400">
-              {"Software engineer crafting accessible, pixel-perfect interfaces and robust systems. Focused on creating products that people love to use."}
+              {profile.longBio}
             </p>
 
             {/* CTA buttons - hover lift, glow, animated gradient (SVGator liquid/gradient) */}
@@ -50,21 +50,21 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild className="h-14 px-8 text-base rounded-xl gap-2 bg-transparent border-border/50 hover:bg-muted/50 hover:border-border hover-lift transition-all duration-300 hover:scale-[1.02] active:scale-[0.99]">
-                <a href="#resume-placeholder" download>
+                <Link href="/resume">
                   <Download className="h-5 w-5" />
                   Resume
-                </a>
+                </Link>
               </Button>
             </div>
 
             {/* Quick stats - scale in with stagger */}
             <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg animate-fade-in-up delay-600">
               <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
-                <p className="text-3xl font-bold text-primary">5+</p>
-                <p className="text-sm text-muted-foreground mt-1">Years Experience</p>
+                <p className="text-3xl font-bold text-primary">May 2026</p>
+                <p className="text-sm text-muted-foreground mt-1">Expected Graduation</p>
               </div>
               <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
-                <p className="text-3xl font-bold text-primary">50+</p>
+                <p className="text-3xl font-bold text-primary">4</p>
                 <p className="text-sm text-muted-foreground mt-1">Projects Built</p>
               </div>
               <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
@@ -206,14 +206,14 @@ export default function HomePage() {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button size="lg" asChild className="h-14 px-8 text-base rounded-xl gap-2 w-full sm:w-auto shadow-lg shadow-primary/25 hover:shadow-primary/40 hover-lift hover-lift-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] focus-ring-animate cta-gradient-animate border-0 focus-visible:ring-0">
-                  <a href="mailto:placeholder@example.com">
+                  <a href={`mailto:${profile.email}`}>
                     <Mail className="h-5 w-5" />
                     Get in Touch
                   </a>
                 </Button>
                 <div className="flex items-center gap-3">
                   <a
-                    href="#github-placeholder"
+                    href={profile.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-14 w-14 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted hover-icon transition-all duration-300"
@@ -222,7 +222,7 @@ export default function HomePage() {
                     <Github className="h-6 w-6" />
                   </a>
                   <a
-                    href="#linkedin-placeholder"
+                    href={profile.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-14 w-14 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted hover-icon transition-all duration-300"

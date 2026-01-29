@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu, X, Github, Linkedin } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useState } from "react"
+import { profile } from "@/lib/data"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -28,10 +29,10 @@ export function Navbar() {
           className="group flex items-center gap-2"
         >
           <div className="hover-icon relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all duration-300 group-hover:bg-primary/20 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <span className="text-lg font-bold text-primary">Y</span>
+            <span className="text-lg font-bold text-primary">M</span>
           </div>
           <span className="hidden sm:block text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary/90">
-            Your Name
+            {profile.fullName}
           </span>
         </Link>
 
@@ -57,7 +58,7 @@ export function Navbar() {
         {/* Right side actions - icon scale + glow on hover */}
         <div className="hidden md:flex items-center gap-2">
           <a
-            href="#github-placeholder"
+            href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hover-icon flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300"
@@ -66,7 +67,7 @@ export function Navbar() {
             <Github className="h-5 w-5" />
           </a>
           <a
-            href="#linkedin-placeholder"
+            href={profile.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hover-icon flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300"
@@ -132,7 +133,7 @@ export function Navbar() {
             ))}
             <div className="pt-4 mt-4 border-t border-border/30 flex items-center gap-3">
               <a
-                href="#github-placeholder"
+                href={profile.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
@@ -141,7 +142,7 @@ export function Navbar() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="#linkedin-placeholder"
+                href={profile.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
