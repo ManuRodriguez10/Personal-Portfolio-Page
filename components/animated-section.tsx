@@ -9,6 +9,7 @@ interface AnimatedSectionProps {
   delay?: number
   as?: "div" | "section"
   id?: string
+  variant?: "default" | "statCard"
 }
 
 export function AnimatedSection({
@@ -17,15 +18,18 @@ export function AnimatedSection({
   delay = 0,
   as: Component = "div",
   id,
+  variant = "default",
 }: AnimatedSectionProps) {
   const { ref, isInView } = useInView({ triggerOnce: true })
+
+  const animationClass = variant === "statCard" ? "animate-stat-card" : "animate-on-scroll"
 
   return (
     <Component
       ref={ref as React.RefObject<HTMLElement>}
       id={id}
       className={cn(
-        "animate-on-scroll",
+        animationClass,
         isInView && "is-visible",
         className
       )}

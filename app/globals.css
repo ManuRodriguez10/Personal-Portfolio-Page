@@ -118,6 +118,42 @@
 }
 
 /* ---- Aave-inspired animations & effects ---- */
+/* Hero headline: subtle fade + slide up on load (300–500ms, ease-out) */
+@keyframes hero-headline-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stat cards: fade in + slight upward movement, "settle" feel */
+@keyframes stat-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Decorative graphics: soft breathing (scale 0.98 → 1.02), 5–6s loop */
+@keyframes decorative-breathe {
+  0%, 100% { transform: scale(0.99); }
+  50% { transform: scale(1.02); }
+}
+
+/* Decorative graphics: very subtle float/drift */
+@keyframes decorative-float-subtle {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-2px) translateX(1px); }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -235,6 +271,40 @@
 @keyframes ambient-float-d {
   0%, 100% { transform: translate(-50%, -50%) translate(0, 0) rotate(0deg); opacity: 0.35; }
   50% { transform: translate(-50%, -50%) translate(36%, -22%) rotate(18deg); opacity: 0.55; }
+}
+
+.animate-hero-headline {
+  opacity: 0;
+  animation: hero-headline-in 0.4s ease-out forwards;
+}
+
+.animate-stat-card {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.animate-stat-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-decorative-breathe {
+  animation: decorative-breathe 5.5s ease-in-out infinite;
+}
+.animate-decorative-float {
+  animation: decorative-float-subtle 6s ease-in-out infinite;
+}
+
+/* Stat card hover: slight elevate, ~200ms */
+.stat-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.12);
+}
+.dark .stat-card-hover:hover {
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35);
 }
 
 .animate-fade-in-up {
@@ -413,6 +483,26 @@
   }
   .ambient-shape {
     animation: none !important;
+  }
+  .animate-hero-headline {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-stat-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-stat-card.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .animate-decorative-breathe,
+  .animate-decorative-float {
+    animation: none;
+  }
+  .stat-card-hover:hover {
+    transform: none;
   }
 }
 

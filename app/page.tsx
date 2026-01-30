@@ -26,9 +26,9 @@ export default function HomePage() {
               <span className="text-sm font-medium text-primary">Available for new opportunities</span>
             </div>
 
-            {/* Main heading - gradient text via SVG (reliable cross-browser) */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Building exceptional digital experiences.">
-              <svg viewBox="0 0 700 140" className="w-full max-w-4xl" preserveAspectRatio="xMinYMid meet">
+            {/* Main heading - gradient text via SVG, Aave-style fade + slide up on load */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance [&_svg]:max-w-full [&_svg]:h-auto animate-hero-headline" aria-label="Manuel Rodriguez">
+              <svg viewBox="0 0 700 80" className="w-full max-w-4xl" preserveAspectRatio="xMinYMid meet">
                 <defs>
                   <linearGradient id="hero-title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="var(--foreground)" />
@@ -37,10 +37,7 @@ export default function HomePage() {
                   </linearGradient>
                 </defs>
                 <text x="0" y="52" fill="url(#hero-title-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
-                  Building exceptional
-                </text>
-                <text x="0" y="110" fill="url(#hero-title-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
-                  digital experiences.
+                  Manuel Rodriguez
                 </text>
               </svg>
             </h1>
@@ -68,30 +65,92 @@ export default function HomePage() {
               </Button>
             </div>
 
-            {/* Quick stats - scale in with stagger */}
-            <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg animate-fade-in-up delay-600">
-              <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
-                <p className="text-3xl font-bold text-primary">May 2026</p>
-                <p className="text-sm text-muted-foreground mt-1">Expected Graduation</p>
-              </div>
-              <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
-                <p className="text-3xl font-bold text-primary">4</p>
-                <p className="text-sm text-muted-foreground mt-1">Projects Built</p>
-              </div>
-              <div className="transition-transform duration-300 hover:scale-105 hover:-translate-y-0.5">
-                <p className="text-3xl font-bold text-primary">100%</p>
-                <p className="text-sm text-muted-foreground mt-1">Dedication</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
+      {/* Key metrics: left = Projects + Related coursework (stacked); right = May 2026 (full height) */}
+      <SectionContainer className="relative">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance mb-10 lg:mb-12 [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Key highlights">
+            <svg viewBox="0 0 320 64" className="w-full max-w-2xl" preserveAspectRatio="xMinYMid meet">
+              <defs>
+                <linearGradient id="key-highlights-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--foreground)" />
+                  <stop offset="50%" stopColor="var(--primary)" />
+                  <stop offset="100%" stopColor="var(--foreground)" />
+                </linearGradient>
+              </defs>
+              <text x="0" y="42" fill="url(#key-highlights-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
+                Key highlights.
+              </text>
+            </svg>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] md:grid-rows-2 gap-6 lg:gap-8">
+            {/* Top-left: Projects */}
+            <AnimatedSection variant="statCard" delay={0} className="group md:row-span-1">
+              <div className="relative min-h-[180px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden stat-card-hover">
+                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">{projects.length}</p>
+                <p className="mt-2 text-sm text-foreground/80">Projects built.</p>
+                <div className="absolute right-6 bottom-6 w-24 h-24 text-primary/70 animate-decorative-breathe" aria-hidden>
+                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
+                    <circle cx="18" cy="62" r="5" opacity="0.5" />
+                    <circle cx="32" cy="52" r="6" opacity="0.6" />
+                    <circle cx="46" cy="42" r="7" opacity="0.7" />
+                    <circle cx="60" cy="32" r="8" opacity="0.8" />
+                    <circle cx="74" cy="22" r="9" opacity="0.9" />
+                  </svg>
+                </div>
+              </div>
+            </AnimatedSection>
+            {/* Right: Expected graduation (spans full height of left column) */}
+            <AnimatedSection variant="statCard" delay={100} className="group md:row-span-2 md:min-h-0">
+              <div className="relative min-h-[180px] md:min-h-full rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden flex flex-col stat-card-hover">
+                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">May 2026</p>
+                <p className="mt-2 text-sm text-foreground/80">Expected graduation.</p>
+                <div className="absolute right-6 bottom-6 w-20 h-20 text-primary/70 animate-decorative-float" aria-hidden>
+                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
+                    <circle cx="56" cy="24" r="10" opacity="0.9" />
+                    <circle cx="24" cy="56" r="10" opacity="0.6" />
+                    <path d="M68 12 L12 68" stroke="currentColor" strokeWidth="6" strokeLinecap="round" opacity="0.7" fill="none" />
+                  </svg>
+                </div>
+              </div>
+            </AnimatedSection>
+            {/* Bottom-left: Related coursework */}
+            <AnimatedSection variant="statCard" delay={200} className="group md:row-span-1">
+              <div className="relative min-h-[180px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden stat-card-hover">
+                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">10+</p>
+                <p className="mt-2 text-sm text-foreground/80">Related coursework.</p>
+                <div className="absolute right-6 bottom-6 w-20 h-20 text-primary/70 animate-decorative-breathe" aria-hidden>
+                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
+                    <rect x="16" y="48" width="12" height="24" rx="3" opacity="0.6" />
+                    <rect x="34" y="36" width="12" height="36" rx="3" opacity="0.8" />
+                    <rect x="52" y="24" width="12" height="48" rx="3" opacity="1" />
+                  </svg>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </SectionContainer>
+
       {/* Skills Section - ongoing carousel (Aave-style) - first after hero */}
       <SectionContainer className="relative bg-muted/20">
         <AnimatedSection className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            Skills & technologies.
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Skills and technologies">
+            <svg viewBox="0 0 520 64" className="w-full max-w-3xl mx-auto" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="skills-technologies-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--foreground)" />
+                  <stop offset="50%" stopColor="var(--primary)" />
+                  <stop offset="100%" stopColor="var(--foreground)" />
+                </linearGradient>
+              </defs>
+              <text x="50%" y="42" textAnchor="middle" fill="url(#skills-technologies-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
+                Skills &amp; technologies.
+              </text>
+            </svg>
           </h2>
           <div className="mt-4 flex justify-center text-primary">
             <DrawingLine width="80px" strokeWidth={2} />
