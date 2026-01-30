@@ -11,6 +11,7 @@ import { ArrowRight, Download, Mail, Github, Linkedin, GraduationCap } from "luc
 
 // Import animation data
 import animationData from "@/public/animations/isometric-data-analysis.json"
+import webDevelopmentData from "@/public/animations/web-development.json"
 
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured)
@@ -19,8 +20,9 @@ export default function HomePage() {
     <>
       {/* Hero Section - Aave-style entrance animations (background from DynamicBackground) */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-8 py-20">
-          <div className="max-w-4xl">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-20 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-4xl">
             {/* Status badge - fade in first */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in-up">
               <span className="relative flex h-2 w-2">
@@ -36,7 +38,7 @@ export default function HomePage() {
                 <defs>
                   <linearGradient id="hero-title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="var(--foreground)" />
-                    <stop offset="50%" stopColor="var(--primary)" />
+                    <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
                     <stop offset="100%" stopColor="var(--foreground)" />
                   </linearGradient>
                 </defs>
@@ -69,6 +71,15 @@ export default function HomePage() {
               </Button>
             </div>
 
+            </div>
+
+            {/* Web Development Lottie - right side on desktop */}
+            <div className="hidden lg:flex items-center justify-center animate-fade-in-up delay-600">
+              <LottieAnimation
+                animationData={webDevelopmentData}
+                className="w-full max-w-md"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -79,11 +90,11 @@ export default function HomePage() {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-10 lg:mb-12 [&_svg]:h-auto" aria-label="Key highlights">
             <svg viewBox="0 0 450 80" className="w-full max-w-[320px] mx-auto" preserveAspectRatio="xMinYMid meet">
               <defs>
-                <linearGradient id="key-highlights-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="var(--foreground)" />
-                  <stop offset="50%" stopColor="var(--primary)" />
-                  <stop offset="100%" stopColor="var(--foreground)" />
-                </linearGradient>
+<linearGradient id="key-highlights-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="var(--foreground)" />
+                <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
+                <stop offset="100%" stopColor="var(--foreground)" />
+              </linearGradient>
               </defs>
               <text x="50%" y="52" textAnchor="middle" fill="url(#key-highlights-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
                 Key highlights
@@ -96,9 +107,9 @@ export default function HomePage() {
               <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
                 <div className="flex flex-col justify-center">
                   <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">May 2026</p>
-                  <p className="mt-1 text-sm text-foreground/80">Expected graduation.</p>
+                  <p className="mt-1 text-base lg:text-lg text-foreground/80">Expected graduation.</p>
                 </div>
-                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-32 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
+                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-50 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
                   <GraduationCap className="w-full h-full" />
                 </div>
               </div>
@@ -107,7 +118,7 @@ export default function HomePage() {
             <AnimatedSection variant="statCard" delay={100} className="md:row-span-2 md:min-h-0">
               <div className="flex flex-col items-center justify-center text-center min-h-[280px] md:min-h-full rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover gap-4">
                 <p className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight">{projects.length}</p>
-                <p className="text-base lg:text-lg text-foreground/80">Projects built.</p>
+                <p className="text-lg lg:text-xl text-foreground/80">Projects built.</p>
                 <div className="w-64 h-64 lg:w-80 lg:h-80 opacity-70 flex items-center justify-center mt-1" aria-hidden>
                   <LottieAnimation animationData={animationData} className="w-full h-full" />
                 </div>
@@ -118,9 +129,9 @@ export default function HomePage() {
               <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
                 <div className="flex flex-col justify-center">
                   <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">10+</p>
-                  <p className="mt-1 text-sm text-foreground/80">Related coursework.</p>
+                  <p className="mt-1 text-base lg:text-lg text-foreground/80">Related coursework.</p>
                 </div>
-                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-32 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
+                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-50 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
                   <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
                     <rect x="16" y="48" width="12" height="24" rx="3" opacity="0.6" />
                     <rect x="34" y="36" width="12" height="36" rx="3" opacity="0.8" />
@@ -139,11 +150,11 @@ export default function HomePage() {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Skills and dth">
             <svg viewBox="0 0 520 64" className="w-full max-w-3xl mx-auto" preserveAspectRatio="xMidYMid meet">
               <defs>
-                <linearGradient id="skills-technologies-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="var(--foreground)" />
-                  <stop offset="50%" stopColor="var(--primary)" />
-                  <stop offset="100%" stopColor="var(--foreground)" />
-                </linearGradient>
+<linearGradient id="skills-technologies-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="var(--foreground)" />
+                <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
+                <stop offset="100%" stopColor="var(--foreground)" />
+              </linearGradient>
               </defs>
               <text x="50%" y="42" textAnchor="middle" fill="url(#skills-technologies-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
                 Skills &amp; technologies.

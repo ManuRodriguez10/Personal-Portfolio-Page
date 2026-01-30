@@ -390,6 +390,15 @@
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
+
+/* Gradient text: primary color fades in and out (title headings) */
+@keyframes gradient-text-fade {
+  0%, 100% { stop-opacity: 0.4; }
+  50% { stop-opacity: 1; }
+}
+.gradient-fade-stop {
+  animation: gradient-text-fade 3s ease-in-out infinite;
+}
 @keyframes focus-ring-pulse {
   0%, 100% { box-shadow: 0 0 0 2px oklch(0.72 0.18 195 / 0.3); }
   50% { box-shadow: 0 0 0 4px oklch(0.72 0.18 195 / 0.5); }
@@ -487,6 +496,10 @@
   .animate-hero-headline {
     animation: none;
     opacity: 1;
+  }
+  .gradient-fade-stop {
+    animation: none;
+    stop-opacity: 1;
   }
   .animate-stat-card {
     opacity: 1;
