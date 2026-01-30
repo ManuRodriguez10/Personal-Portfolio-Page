@@ -6,7 +6,7 @@ import { SkillsCarousel } from "@/components/skills-carousel"
 import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
 import { projects, skills, profile } from "@/lib/data"
-import { ArrowRight, Download, Mail, Github, Linkedin, Sparkles, Code2, Palette, Zap } from "lucide-react"
+import { ArrowRight, Download, Mail, Github, Linkedin } from "lucide-react"
 
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured)
@@ -72,8 +72,8 @@ export default function HomePage() {
       {/* Key metrics: left = Projects + Related coursework (stacked); right = May 2026 (full height) */}
       <SectionContainer className="relative">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance mb-10 lg:mb-12 [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Key highlights">
-            <svg viewBox="0 0 320 64" className="w-full max-w-2xl" preserveAspectRatio="xMinYMid meet">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-10 lg:mb-12 [&_svg]:h-auto" aria-label="Key highlights">
+            <svg viewBox="0 0 450 80" className="w-full max-w-[320px] mx-auto" preserveAspectRatio="xMinYMid meet">
               <defs>
                 <linearGradient id="key-highlights-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="var(--foreground)" />
@@ -81,8 +81,8 @@ export default function HomePage() {
                   <stop offset="100%" stopColor="var(--foreground)" />
                 </linearGradient>
               </defs>
-              <text x="0" y="42" fill="url(#key-highlights-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
-                Key highlights.
+              <text x="50%" y="52" textAnchor="middle" fill="url(#key-highlights-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
+                Key highlights
               </text>
             </svg>
           </h2>
@@ -163,42 +163,6 @@ export default function HomePage() {
         <AnimatedSection>
           <SkillsCarousel skills={skills.flatMap((g) => g.items)} />
         </AnimatedSection>
-      </SectionContainer>
-
-      {/* What I Do Section - scroll-triggered reveal + line draw (SVGator) */}
-      <SectionContainer className="relative">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            What I do.
-          </h2>
-          <div className="mt-4 flex justify-center text-primary">
-            <DrawingLine width="80px" strokeWidth={2} />
-          </div>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Crafting digital experiences from concept to deployment.
-          </p>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { icon: Code2, title: "Development", description: "Building scalable applications with modern frameworks and best practices." },
-            { icon: Palette, title: "Design", description: "Creating intuitive interfaces with attention to detail and user experience." },
-            { icon: Zap, title: "Performance", description: "Optimizing for speed and efficiency across all devices and platforms." },
-            { icon: Sparkles, title: "Innovation", description: "Exploring new technologies and implementing creative solutions." },
-          ].map((item, i) => (
-            <AnimatedSection key={item.title} delay={80 * (i + 1)}>
-              <div 
-                className="group relative p-8 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/30 hover:border-primary/30 hover:bg-card/80 hover-lift hover-lift-glow transition-all duration-500"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                  <item.icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
       </SectionContainer>
 
       {/* Featured Projects Section - scroll-triggered reveal + line draw */}
