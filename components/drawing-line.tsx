@@ -23,14 +23,14 @@ export function DrawingLine({
   const { ref, isInView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
-    <div ref={ref} className={cn("inline-flex justify-start", className)}>
+    <div ref={ref} className={cn("inline-flex justify-start opacity-100", className)}>
       <svg
         width={width}
         height={strokeWidth + 4}
         viewBox={`0 0 200 ${strokeWidth + 4}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="overflow-visible"
+        className="overflow-visible opacity-100"
         aria-hidden
       >
         <line
@@ -40,6 +40,7 @@ export function DrawingLine({
           y2={(strokeWidth + 4) / 2}
           stroke="currentColor"
           strokeWidth={strokeWidth}
+          strokeOpacity={1}
           strokeLinecap="round"
           strokeDasharray="200"
           strokeDashoffset={isInView ? 0 : 200}

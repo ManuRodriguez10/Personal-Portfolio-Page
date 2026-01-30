@@ -5,8 +5,12 @@ import { ProjectCard } from "@/components/project-card"
 import { SkillsCarousel } from "@/components/skills-carousel"
 import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
+import { LottieAnimation } from "@/components/lottie-animation"
 import { projects, skills, profile } from "@/lib/data"
-import { ArrowRight, Download, Mail, Github, Linkedin } from "lucide-react"
+import { ArrowRight, Download, Mail, Github, Linkedin, GraduationCap } from "lucide-react"
+
+// Import animation data
+import animationData from "@/public/animations/isometric-data-analysis.json"
 
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured)
@@ -41,8 +45,8 @@ export default function HomePage() {
                 </text>
               </svg>
             </h1>
-            <div className="mt-6 animate-fade-in-up delay-350 text-primary">
-              <DrawingLine width="120px" strokeWidth={2} />
+            <div className="mt-6 animate-fade-in-up delay-350 text-primary opacity-100">
+              <DrawingLine width="120px" strokeWidth={4} />
             </div>
 
             <p className="mt-8 text-xl text-muted-foreground leading-relaxed max-w-2xl animate-fade-in-up delay-400">
@@ -69,8 +73,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Key metrics: left = Projects + Related coursework (stacked); right = May 2026 (full height) */}
-      <SectionContainer className="relative">
+      {/* Key highlights: simple 3-column grid, each card has text + icon in flex layout */}
+      <SectionContainer>
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-10 lg:mb-12 [&_svg]:h-auto" aria-label="Key highlights">
             <svg viewBox="0 0 450 80" className="w-full max-w-[320px] mx-auto" preserveAspectRatio="xMinYMid meet">
@@ -86,43 +90,37 @@ export default function HomePage() {
               </text>
             </svg>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] md:grid-rows-2 gap-6 lg:gap-8">
-            {/* Top-left: Projects */}
-            <AnimatedSection variant="statCard" delay={0} className="group md:row-span-1">
-              <div className="relative min-h-[180px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden stat-card-hover">
-                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">{projects.length}</p>
-                <p className="mt-2 text-sm text-foreground/80">Projects built.</p>
-                <div className="absolute right-6 bottom-6 w-24 h-24 text-primary/70 animate-decorative-breathe" aria-hidden>
-                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
-                    <circle cx="18" cy="62" r="5" opacity="0.5" />
-                    <circle cx="32" cy="52" r="6" opacity="0.6" />
-                    <circle cx="46" cy="42" r="7" opacity="0.7" />
-                    <circle cx="60" cy="32" r="8" opacity="0.8" />
-                    <circle cx="74" cy="22" r="9" opacity="0.9" />
-                  </svg>
+          <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 md:auto-rows-fr">
+            {/* Expected graduation - top left */}
+            <AnimatedSection variant="statCard" delay={0} className="md:row-span-1">
+              <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
+                <div className="flex flex-col justify-center">
+                  <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">May 2026</p>
+                  <p className="mt-1 text-sm text-foreground/80">Expected graduation.</p>
+                </div>
+                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-32 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
+                  <GraduationCap className="w-full h-full" />
                 </div>
               </div>
             </AnimatedSection>
-            {/* Right: Expected graduation (spans full height of left column) */}
-            <AnimatedSection variant="statCard" delay={100} className="group md:row-span-2 md:min-h-0">
-              <div className="relative min-h-[180px] md:min-h-full rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden flex flex-col stat-card-hover">
-                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">May 2026</p>
-                <p className="mt-2 text-sm text-foreground/80">Expected graduation.</p>
-                <div className="absolute right-6 bottom-6 w-20 h-20 text-primary/70 animate-decorative-float" aria-hidden>
-                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
-                    <circle cx="56" cy="24" r="10" opacity="0.9" />
-                    <circle cx="24" cy="56" r="10" opacity="0.6" />
-                    <path d="M68 12 L12 68" stroke="currentColor" strokeWidth="6" strokeLinecap="round" opacity="0.7" fill="none" />
-                  </svg>
+            {/* Projects built - right, spans both rows */}
+            <AnimatedSection variant="statCard" delay={100} className="md:row-span-2 md:min-h-0">
+              <div className="flex flex-col items-center justify-center text-center min-h-[280px] md:min-h-full rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover gap-4">
+                <p className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight">{projects.length}</p>
+                <p className="text-base lg:text-lg text-foreground/80">Projects built.</p>
+                <div className="w-64 h-64 lg:w-80 lg:h-80 opacity-70 flex items-center justify-center mt-1" aria-hidden>
+                  <LottieAnimation animationData={animationData} className="w-full h-full" />
                 </div>
               </div>
             </AnimatedSection>
-            {/* Bottom-left: Related coursework */}
-            <AnimatedSection variant="statCard" delay={200} className="group md:row-span-1">
-              <div className="relative min-h-[180px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 overflow-hidden stat-card-hover">
-                <p className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight">10+</p>
-                <p className="mt-2 text-sm text-foreground/80">Related coursework.</p>
-                <div className="absolute right-6 bottom-6 w-20 h-20 text-primary/70 animate-decorative-breathe" aria-hidden>
+            {/* Related coursework - bottom left */}
+            <AnimatedSection variant="statCard" delay={200} className="md:row-span-1">
+              <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
+                <div className="flex flex-col justify-center">
+                  <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">10+</p>
+                  <p className="mt-1 text-sm text-foreground/80">Related coursework.</p>
+                </div>
+                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-32 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
                   <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
                     <rect x="16" y="48" width="12" height="24" rx="3" opacity="0.6" />
                     <rect x="34" y="36" width="12" height="36" rx="3" opacity="0.8" />
@@ -138,7 +136,7 @@ export default function HomePage() {
       {/* Skills Section - ongoing carousel (Aave-style) - first after hero */}
       <SectionContainer className="relative bg-muted/20">
         <AnimatedSection className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Skills and technologies">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Skills and dth">
             <svg viewBox="0 0 520 64" className="w-full max-w-3xl mx-auto" preserveAspectRatio="xMidYMid meet">
               <defs>
                 <linearGradient id="skills-technologies-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -152,8 +150,8 @@ export default function HomePage() {
               </text>
             </svg>
           </h2>
-          <div className="mt-4 flex justify-center text-primary">
-            <DrawingLine width="80px" strokeWidth={2} />
+          <div className="mt-4 flex justify-center text-primary opacity-100">
+            <DrawingLine width="80px" strokeWidth={4} />
           </div>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             The tools and technologies I use to bring ideas to life.
@@ -172,8 +170,8 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Featured projects.
             </h2>
-            <div className="mt-4 text-primary">
-              <DrawingLine width="100px" strokeWidth={2} />
+            <div className="mt-4 text-primary opacity-100">
+              <DrawingLine width="100px" strokeWidth={4} />
             </div>
             <p className="mt-4 text-lg text-muted-foreground max-w-xl">
               A selection of recent work that showcases my skills and approach to problem-solving.
@@ -217,8 +215,8 @@ export default function HomePage() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
                 {"Let's build something great together."}
               </h2>
-              <div className="mt-4 flex justify-center text-primary">
-                <DrawingLine width="120px" strokeWidth={2} />
+              <div className="mt-4 flex justify-center text-primary opacity-100">
+                <DrawingLine width="120px" strokeWidth={4} />
               </div>
               <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
                 {"I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out."}
