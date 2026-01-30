@@ -15,11 +15,40 @@ export interface Project {
 
 interface ProjectCardProps {
   project: Project
-  variant?: "default" | "featured"
+  variant?: "default" | "featured" | "teaser"
 }
 
 export function ProjectCard({ project, variant = "default" }: ProjectCardProps) {
   const isFeatured = variant === "featured"
+  const isTeaser = variant === "teaser"
+
+  if (isTeaser) {
+    const firstSentence = project.description.match(/^[^.!?]*[.!?]/)?.[0] ?? project.description.split(/\s+/).slice(0, 12).join(" ") + "…"
+    return (
+      <article
+        className={cn(
+          "group relative flex flex-col overflow-hidden rounded-2xl h-[340px]",
+          "bg-gradient-to-br from-primary/20 via-primary/10 to-transparent",
+          "border border-primary/20",
+          "transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_40px_-12px] hover:shadow-primary/20",
+          "hover-lift"
+        )}
+      >
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/10 rounded-full blur-3xl opacity-60 pointer-events-none" aria-hidden />
+        <div className="relative flex flex-1 flex-col p-6 min-h-0 gap-3">
+          <div className="h-10 w-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 shrink-0">
+            <span className="text-base font-bold text-primary">{project.title.charAt(0)}</span>
+          </div>
+          <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
+            {project.title}
+          </h3>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {firstSentence}
+          </p>
+        </div>
+      </article>
+    )
+  }
 
   return (
     <article

@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
 import { LottieAnimation } from "@/components/lottie-animation"
 import { projects, skills, profile } from "@/lib/data"
-import { ArrowRight, Download, Mail, Github, Linkedin, GraduationCap } from "lucide-react"
+import { ArrowRight, Download, Github, Linkedin, GraduationCap } from "lucide-react"
 
 // Import animation data
 import animationData from "@/public/animations/isometric-data-analysis.json"
@@ -178,8 +178,19 @@ export default function HomePage() {
       <SectionContainer id="projects" className="relative">
         <AnimatedSection className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Featured projects.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Featured projects">
+              <svg viewBox="0 0 420 64" className="w-full max-w-md" preserveAspectRatio="xMinYMid meet">
+                <defs>
+                  <linearGradient id="featured-projects-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="var(--foreground)" />
+                    <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
+                    <stop offset="100%" stopColor="var(--foreground)" />
+                  </linearGradient>
+                </defs>
+                <text x="0" y="42" fill="url(#featured-projects-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
+                  Featured projects.
+                </text>
+              </svg>
             </h2>
             <div className="mt-4 text-primary opacity-100">
               <DrawingLine width="100px" strokeWidth={4} />
@@ -190,79 +201,29 @@ export default function HomePage() {
           </div>
           <Link
             href="/projects"
-            className="group hidden sm:inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-muted-foreground hover:text-foreground rounded-xl border border-border/50 hover:border-border hover:bg-muted/30 hover-lift hover-underline transition-all duration-300"
+            className="group hidden sm:inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-primary rounded-xl border border-primary/20 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent hover:border-primary/40 hover:bg-primary/20 hover-lift hover-underline transition-all duration-300"
           >
             View all projects
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </AnimatedSection>
 
-        <div className="space-y-8">
-          {featuredProjects.map((project, i) => (
-            <AnimatedSection key={project.id} delay={120 * (i + 1)}>
-              <ProjectCard project={project} variant="featured" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {featuredProjects.slice(0, 4).map((project, i) => (
+            <AnimatedSection key={project.id} delay={80 * (i + 1)}>
+              <ProjectCard project={project} variant="teaser" />
             </AnimatedSection>
           ))}
         </div>
 
-        <div className="mt-10 sm:hidden">
-          <Button variant="outline" asChild className="w-full h-14 text-base rounded-xl gap-2 bg-transparent">
+        <div className="mt-10">
+          <Button variant="outline" asChild className="w-full h-14 text-base rounded-xl gap-2 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/20 hover:text-primary">
             <Link href="/projects">
               View all projects
               <ArrowRight className="h-5 w-5" />
             </Link>
           </Button>
         </div>
-      </SectionContainer>
-
-      {/* Contact CTA Section - scroll-triggered reveal + line draw */}
-      <SectionContainer className="relative">
-        <AnimatedSection>
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 p-12 sm:p-16 lg:p-20 hover-lift transition-all duration-300">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/10 rounded-full blur-[100px] opacity-50" />
-            
-            <div className="relative text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-                {"Let's build something great together."}
-              </h2>
-              <div className="mt-4 flex justify-center text-primary opacity-100">
-                <DrawingLine width="120px" strokeWidth={4} />
-              </div>
-              <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                {"I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out."}
-              </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" asChild className="h-14 px-8 text-base rounded-xl gap-2 w-full sm:w-auto shadow-lg shadow-primary/25 hover:shadow-primary/40 hover-lift hover-lift-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] focus-ring-animate cta-gradient-animate border-0 focus-visible:ring-0">
-                  <a href={`mailto:${profile.email}`}>
-                    <Mail className="h-5 w-5" />
-                    Get in Touch
-                  </a>
-                </Button>
-                <div className="flex items-center gap-3">
-                  <a
-                    href={profile.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted hover-icon transition-all duration-300"
-                    aria-label="GitHub"
-                  >
-                    <Github className="h-6 w-6" />
-                  </a>
-                  <a
-                    href={profile.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted hover-icon transition-all duration-300"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin className="h-6 w-6" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
       </SectionContainer>
     </>
   )
