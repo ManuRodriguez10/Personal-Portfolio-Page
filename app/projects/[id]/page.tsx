@@ -39,7 +39,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound()
   }
 
-  const useEnhancedLayout = project.id === 'vibing-sarasota' || project.id === 'nsae-web-app'
+  const useEnhancedLayout = project.id === 'vibing-sarasota' || project.id === 'nsae-web-app' || project.id === 'banyan-board'
 
   // Side-by-side layout for featured projects
   if (useEnhancedLayout) {
@@ -133,7 +133,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <div className="flex flex-col gap-3">
               {/* Top-right: Metadata Card (desktop only) */}
               <div className="hidden lg:block shrink-0 w-full">
-                <div className="p-4 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/20 shadow-lg">
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 shadow-lg">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
@@ -168,7 +168,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               {/* Bottom-right: Carousel - wider aspect ratio */}
               <div className="w-full">
-                <div className="rounded-2xl bg-card/30 backdrop-blur-sm border border-border/20 shadow-2xl shadow-black/10 p-3">
+                <div className="rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 shadow-2xl shadow-black/10 p-3">
                   <div className="aspect-[16/9] w-full">
                     <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} />
                   </div>
