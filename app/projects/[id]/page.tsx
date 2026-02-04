@@ -39,10 +39,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound()
   }
 
-  const isVibingSarasota = project.id === 'vibing-sarasota'
+  const useEnhancedLayout = project.id === 'vibing-sarasota' || project.id === 'nsae-web-app'
 
-  // Side-by-side layout for Vibing Sarasota
-  if (isVibingSarasota) {
+  // Side-by-side layout for featured projects
+  if (useEnhancedLayout) {
     return (
       <section className="relative min-h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] flex items-center justify-center py-6 lg:py-8">
         <div className="absolute inset-0 overflow-hidden">
@@ -79,18 +79,22 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               {/* Links */}
               <div className="flex flex-wrap gap-3 pt-1">
-                <Button asChild size="default" className="h-10 px-6 rounded-xl gap-2 shadow-lg shadow-primary/25">
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4" />
-                    Live Demo
-                  </a>
-                </Button>
-                <Button variant="outline" size="default" asChild className="h-10 px-6 rounded-xl gap-2 bg-transparent border-border/50">
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4" />
-                    View Code
-                  </a>
-                </Button>
+                {project.liveUrl && project.liveUrl !== "#" && (
+                  <Button asChild size="default" className="h-10 px-6 rounded-xl gap-2 shadow-lg shadow-primary/25">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4" />
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+                {project.githubUrl && project.githubUrl !== "" && (
+                  <Button variant="outline" size="default" asChild className="h-10 px-6 rounded-xl gap-2 bg-transparent border-border/50">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4" />
+                      View Code
+                    </a>
+                  </Button>
+                )}
               </div>
 
               {/* Mobile-only Metadata (shows below buttons on mobile) */}

@@ -38,9 +38,17 @@ export const projects: Project[] = [
     title: "NSAE Web App",
     description: "A comprehensive web application using Django and React for a non-profit animal shelter, aimed at boosting volunteer engagement and streamlining event management. Implemented advanced user authentication and registration systems to facilitate easy sign-up processes for new volunteers. Engineered dynamic user interfaces with React that allow registered volunteers to easily access information on upcoming events, log volunteer hours, and interact with the platform in a user-friendly manner. Leveraged Django's robust backend capabilities to enable detailed activity tracking and generate intuitive reports and dashboards for administrative staff.",
     tech: ["Django", "React"],
-    githubUrl: "https://github.com/ManuRodriguez10",
+    githubUrl: "",
     liveUrl: "#",
     featured: true,
+    timeline: "1 month",
+    role: "Software Engineering Project 2",
+    type: "Web App",
+    images: [
+      "/assets/nsae-web-app-1.png",
+      "/assets/nsae-web-app-2.png",
+      "/assets/nsae-web-app-3.png",
+    ],
   },
   {
     id: "banyan-board",
