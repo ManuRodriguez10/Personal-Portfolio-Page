@@ -1,6 +1,7 @@
 import Link from "next/link"
+import Image from "next/image"
 import { TechBadge } from "./tech-badge"
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface Project {
@@ -65,39 +66,39 @@ export function ProjectCard({ project, variant = "default" }: ProjectCardProps) 
         isFeatured && "md:flex-row md:items-stretch"
       )}
     >
-      {/* Image Placeholder - zoom on hover (Aave-style) */}
+      {/* Image or Placeholder - zoom on hover (Aave-style) */}
       <div 
         className={cn(
           "relative aspect-video w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50",
           isFeatured && "md:w-1/2 md:aspect-auto md:min-h-[320px]"
         )}
       >
-        <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-105">
-          <div className="text-center space-y-2">
-            <div className="h-16 w-16 mx-auto rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-              <span className="text-2xl font-bold text-primary">{project.title.charAt(0)}</span>
+        {project.images && project.images.length > 0 ? (
+          <Image
+            src={project.images[0]}
+            alt={`${project.title} preview`}
+            fill
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-105">
+            <div className="text-center space-y-2">
+              <div className="h-16 w-16 mx-auto rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
+                <span className="text-2xl font-bold text-primary">{project.title.charAt(0)}</span>
+              </div>
+              <span className="text-xs text-muted-foreground">Project Preview</span>
             </div>
-            <span className="text-xs text-muted-foreground">Project Preview</span>
           </div>
-        </div>
+        )}
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       {/* Content */}
       <div className={cn("flex flex-col flex-1 p-6 lg:p-8", isFeatured && "md:w-1/2 md:justify-center")}>
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-            {project.title}
-          </h3>
-          <Link
-            href={`/projects/${project.id}`}
-            className="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground hover-icon transition-all duration-300"
-            aria-label={`View ${project.title} details`}
-          >
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-        </div>
+        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+          {project.title}
+        </h3>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">
           {project.description}
         </p>
@@ -114,26 +115,15 @@ export function ProjectCard({ project, variant = "default" }: ProjectCardProps) 
           )}
         </div>
 
-        {/* Actions */}
-        <div className="mt-6 pt-6 border-t border-border/30 flex items-center gap-4">
-          <a 
-            href={project.githubUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 hover:underline underline-offset-2"
+        {/* Explore Button */}
+        <div className="mt-6 pt-6 border-t border-border/30">
+          <Link
+            href={`/projects/${project.id}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm transition-all duration-300 hover:bg-primary/90 hover:gap-3 shadow-lg shadow-primary/25"
           >
-            <Github className="h-4 w-4 transition-transform duration-200 hover:scale-110" />
-            <span>Source</span>
-          </a>
-          <a 
-            href={project.liveUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 hover:underline underline-offset-2"
-          >
-            <ExternalLink className="h-4 w-4 transition-transform duration-200 hover:scale-110" />
-            <span>Live Demo</span>
-          </a>
+            Explore Project
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </article>
