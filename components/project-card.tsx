@@ -11,6 +11,10 @@ export interface Project {
   githubUrl: string
   liveUrl: string
   featured?: boolean
+  timeline?: string
+  role?: string
+  type?: string
+  images?: string[]
 }
 
 interface ProjectCardProps {
