@@ -29,7 +29,7 @@ export function Navbar() {
           className="group flex items-center gap-2"
         >
           <div className="hover-icon relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all duration-300 group-hover:bg-primary/20 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <span className="text-lg font-bold text-primary">M</span>
+            <span className="text-lg font-bold text-primary">MR</span>
           </div>
           <span className="hidden sm:block text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary/90">
             {profile.fullName}
