@@ -21,7 +21,7 @@ export const projects: Project[] = [
     description: "Built a full-stack soccer team management web app using React and Supabase with role-based authentication and multi-stage onboarding for coaches and players. Implemented team creation and invite-code onboarding, enabling players to join teams and complete profile setup with positions and jersey numbers. Developed real-time, role-specific dashboards displaying team stats, upcoming events, published lineups, and roster counts. Built an interactive lineup builder with multiple formations and drag-and-drop player positioning on a visual soccer field. Ensured secure, role-based data access with Supabase Row-Level Security, and delivered a modern, accessible UI using Tailwind CSS, Radix UI, Framer Motion, and robust form validation.",
     tech: ["React", "Vite", "Supabase", "PostgreSQL", "Tailwind CSS", "Radix UI"],
     githubUrl: "https://github.com/ManuRodriguez10/Match-Fit",
-    liveUrl: "#",
+    liveUrl: "https://drive.google.com/file/d/1wm75iw22IcswkFDzjEpNKi3MysOtuNT-/view?usp=sharing",
     featured: true,
     timeline: "4 months (Ongoing)",
     role: "Senior Thesis",
