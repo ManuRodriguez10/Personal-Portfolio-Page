@@ -78,14 +78,15 @@ export const projects: Project[] = [
     title: "Banyan Board",
     description: "A user-friendly interface using HTML to provide real-time updates on campus events, homework deadlines, and other academic activities, enhancing student engagement and daily planning efficiency. Developed key features including a comprehensive to-do list, interactive pop-up messages, and robust student calendar functionalities using JavaFX. These features enable students to manage and track their academic tasks, stay informed about urgent updates, and efficiently plan their schedules with visual aids and timely alerts.",
     tech: ["HTML", "Java", "JavaFX"],
-    githubUrl: "",
-    liveUrl: "https://drive.google.com/file/d/1O1PsLtAyH7m-IHobEkMGmGX5wJD9gSkI/view?usp=sharing",
+    githubUrl: "https://github.com/ManuRodriguez10/BanyanBoard",
+    liveUrl: "https://drive.google.com/file/d/1RfSkZqRnqj9Qh5PuABBLWdwoxPWLPCS4/view?usp=sharing",
     featured: true,
     timeline: "1 month",
     role: "Software Engineering Project 1",
     type: "Static Page",
     images: [
-      "/assets/banyan-board-home.png",
+      "/assets/banyan-board-1.png",
+      "/assets/banyan-board-2.png",
     ],
   },
   {
