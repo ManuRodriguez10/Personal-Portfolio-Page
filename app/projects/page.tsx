@@ -4,7 +4,7 @@ import { projects } from "@/lib/data"
 import { Folder } from "lucide-react"
 
 export const metadata = {
-  title: "Projects | Your Name",
+  title: "Projects | Manuel Rodriguez",
   description: "A collection of projects I've worked on, showcasing my skills in web development and software engineering.",
 }
 

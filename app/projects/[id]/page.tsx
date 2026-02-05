@@ -39,7 +39,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound()
   }
 
-  const useEnhancedLayout = project.id === 'vibing-sarasota' || project.id === 'nsae-web-app' || project.id === 'banyan-board'
+  const useEnhancedLayout = project.id === 'scent-society' || project.id === 'vibing-sarasota' || project.id === 'nsae-web-app' || project.id === 'banyan-board'
 
   // Side-by-side layout for featured projects
   if (useEnhancedLayout) {
