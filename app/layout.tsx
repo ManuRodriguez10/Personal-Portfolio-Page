@@ -8,6 +8,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { DynamicBackground } from '@/components/dynamic-background'
+import { NavigationTracker } from '@/components/navigation-tracker'
 
 const _inter = Inter({ subsets: ["latin"] });
 
@@ -15,23 +16,6 @@ export const metadata: Metadata = {
   title: 'Manuel Rodriguez',
   description: 'Software engineer building accessible, pixel-perfect digital experiences for the web.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 export const viewport: Viewport = {
@@ -64,6 +48,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <NavigationTracker />
         <Analytics />
         <SpeedInsights />
       </body>

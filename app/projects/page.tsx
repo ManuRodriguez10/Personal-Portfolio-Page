@@ -1,17 +1,35 @@
 import { SectionContainer } from "@/components/section-container"
 import { ProjectCard } from "@/components/project-card"
 import { AnimatedSection } from "@/components/animated-section"
-import { LottieAnimation } from "@/components/lottie-animation"
 import { projects } from "@/lib/data"
 import { Folder } from "lucide-react"
-import developerSkillsData from "@/public/animations/developer-skills.json"
 
 export const metadata = {
   title: "Projects | Manuel Rodriguez",
   description: "A collection of projects I've worked on, showcasing my skills in web development and software engineering.",
 }
 
-export default function ProjectsPage() {
+type ProjectsPageProps = {
+  searchParams?: Promise<{ minimal?: string }>
+}
+
+export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+  const params = searchParams ? await searchParams : {}
+  const isMinimal = params.minimal === "1"
+
+  if (isMinimal) {
+    return (
+      <>
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <h1 className="text-2xl font-bold text-foreground">Projects (minimal)</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Minimal view for debugging back-nav lag. Visit /projects?minimal=1 then go to a project and press back.
+          </p>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       {/* Hero */}
@@ -42,14 +60,6 @@ export default function ProjectsPage() {
                 <span className="text-2xl font-bold text-primary">{projects.length}</span>
                 <span className="text-sm text-muted-foreground">Projects & Counting</span>
               </div>
-            </div>
-
-            {/* Developer Skills Lottie - right side on desktop */}
-            <div className="hidden lg:flex items-center justify-center animate-fade-in-up delay-400">
-              <LottieAnimation
-                animationData={developerSkillsData}
-                className="w-full max-w-md"
-              />
             </div>
           </div>
         </div>

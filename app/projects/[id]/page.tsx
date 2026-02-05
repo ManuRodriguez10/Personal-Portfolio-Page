@@ -56,7 +56,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               {/* Back Link */}
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted/50 transition-all duration-300 w-fit -ml-3"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 rounded-lg bg-primary/10 hover:bg-primary/20 border border-primary/20 transition-all duration-300 w-fit -ml-3"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Projects
@@ -170,7 +170,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <div className="w-full">
                 <div className="rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 shadow-2xl shadow-black/10 p-3">
                   <div className="aspect-[16/9] w-full">
-                    <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} />
+                    <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} projectId={project.id} />
                   </div>
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {/* Back Link */}
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted/50 transition-all duration-300 -ml-4 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/20 transition-all duration-300 -ml-4 mb-8"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Projects
@@ -272,7 +272,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
       {/* Project Images */}
       <SectionContainer className="pt-0 pb-12">
-        <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} />
+        <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} projectId={project.id} />
       </SectionContainer>
     </>
   )

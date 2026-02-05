@@ -111,15 +111,6 @@ export const projects: Project[] = [
       "/assets/nsae-web-app-3.png",
     ],
   },
-  {
-    id: "student-athlete-absence-tracker",
-    title: "Student Athlete Absence Tracker",
-    description: "Designed dynamic GUIs with Java Swing, creating intuitive interfaces that include dropdown menus, forms, and functionalities for generating CSV reports. Implemented advanced absence tracking and notification systems utilizing the Observer design pattern to automate communications, ensuring coaches receive timely updates about athlete absences. The application supports the export of team and athlete data to CSV format, enabling detailed reporting and analysis for coaches and administrative staff.",
-    tech: ["Java", "Java Swing", "Object-Oriented Design Patterns"],
-    githubUrl: "https://github.com/ManuRodriguez10",
-    liveUrl: "#",
-    featured: true,
-  },
 ]
 
 export const skills = [

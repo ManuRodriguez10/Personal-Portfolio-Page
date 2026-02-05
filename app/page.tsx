@@ -1,4 +1,5 @@
 import Link from "next/link"
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { SectionContainer } from "@/components/section-container"
 import { ProjectCard } from "@/components/project-card"
@@ -12,6 +13,10 @@ import { ArrowRight, Download, Github, Linkedin, GraduationCap, Globe } from "lu
 // Import animation data
 import animationData from "@/public/animations/isometric-data-analysis.json"
 import webDevelopmentData from "@/public/animations/web-development.json"
+
+export const metadata: Metadata = {
+  title: "Home | Manuel Rodriguez",
+}
 
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured)
