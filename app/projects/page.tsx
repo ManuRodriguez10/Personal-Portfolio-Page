@@ -1,6 +1,5 @@
 import { SectionContainer } from "@/components/section-container"
 import { ProjectCard } from "@/components/project-card"
-import { AnimatedSection } from "@/components/animated-section"
 import { projects } from "@/lib/data"
 import { Folder } from "lucide-react"
 
@@ -67,14 +66,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
       <SectionContainer className="pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            index < 2 ? (
-              <ProjectCard key={project.id} project={project} />
-            ) : (
-              <AnimatedSection key={project.id} delay={80 * (index + 1)}>
-                <ProjectCard project={project} />
-              </AnimatedSection>
-            )
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </SectionContainer>
