@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
 import { LottieAnimation } from "@/components/lottie-animation"
 import { projects, skills, profile } from "@/lib/data"
-import { ArrowRight, Download, Github, Linkedin, GraduationCap } from "lucide-react"
+import { ArrowRight, Download, Github, Linkedin, GraduationCap, Globe } from "lucide-react"
 
 // Import animation data
 import animationData from "@/public/animations/isometric-data-analysis.json"
@@ -23,40 +23,46 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-4xl">
-            {/* Status badge - fade in first */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in-up">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-              </span>
-              <span className="text-sm font-medium text-primary">Available for new opportunities</span>
+            {/* Manuel Rodriguez Card */}
+            <div className="animate-fade-in-up delay-400">
+              <div className="rounded-3xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
+                <div className="p-8 sm:p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+                  <div className="max-w-3xl mx-auto text-center">
+                    <div className="flex h-24 w-24 mx-auto items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
+                      <span className="text-3xl font-bold text-primary">MR</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+                      {profile.fullName}
+                    </h2>
+                    <p className="mt-3 text-xl text-primary font-medium">{profile.title}</p>
+                    <p className="mt-4 text-base text-muted-foreground">
+                      {profile.address} • {profile.email} • {profile.phone}
+                    </p>
+                    <div className="mt-6 flex items-center justify-center gap-3">
+                      {[
+                        { icon: Github, label: "GitHub", href: profile.githubUrl },
+                        { icon: Linkedin, label: "LinkedIn", href: profile.linkedinUrl },
+                        { icon: Globe, label: "Portfolio", href: "/" },
+                      ].map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target={link.href.startsWith("http") ? "_blank" : undefined}
+                          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
+                          aria-label={link.label}
+                        >
+                          <link.icon className="h-5 w-5" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/* Main heading - gradient text via SVG, Aave-style fade + slide up on load */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance [&_svg]:max-w-full [&_svg]:h-auto animate-hero-headline" aria-label="Manuel Rodriguez">
-              <svg viewBox="0 0 700 80" className="w-full max-w-4xl" preserveAspectRatio="xMinYMid meet">
-                <defs>
-                  <linearGradient id="hero-title-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="var(--foreground)" />
-                    <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
-                    <stop offset="100%" stopColor="var(--foreground)" />
-                  </linearGradient>
-                </defs>
-                <text x="0" y="52" fill="url(#hero-title-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
-                  Manuel Rodriguez
-                </text>
-              </svg>
-            </h1>
-            <div className="mt-6 animate-fade-in-up delay-350 text-primary opacity-100">
-              <DrawingLine width="120px" strokeWidth={4} />
-            </div>
-
-            <p className="mt-8 text-xl text-muted-foreground leading-relaxed max-w-2xl animate-fade-in-up delay-400">
-              {profile.longBio}
-            </p>
 
             {/* CTA buttons - hover lift, glow, animated gradient (SVGator liquid/gradient) */}
-            <div className="mt-12 flex flex-wrap gap-4 animate-fade-in-up delay-500">
+            <div className="mt-12 flex flex-wrap gap-4 justify-center animate-fade-in-up delay-500">
               <Button asChild size="lg" className="h-14 px-8 text-base rounded-xl gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover-lift hover-lift-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] group focus-ring-animate cta-gradient-animate border-0 focus-visible:ring-0">
                 <Link href="/projects" className="inline-flex items-center gap-2">
                   View My Work
