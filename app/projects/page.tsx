@@ -1,7 +1,10 @@
 import { SectionContainer } from "@/components/section-container"
 import { ProjectCard } from "@/components/project-card"
+import { AnimatedSection } from "@/components/animated-section"
+import { LottieAnimation } from "@/components/lottie-animation"
 import { projects } from "@/lib/data"
 import { Folder } from "lucide-react"
+import developerSkillsData from "@/public/animations/developer-skills.json"
 
 export const metadata = {
   title: "Projects | Manuel Rodriguez",
@@ -12,38 +15,56 @@ export default function ProjectsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-12 pb-20">
+      <section className="relative pt-12 pb-8">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/3 h-1/2 bg-primary/15 rounded-full blur-[100px] opacity-50" />
         </div>
         
         <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
-              <Folder className="h-6 w-6 text-primary" />
-            </div>
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Portfolio</span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance">
-            All projects.
-          </h1>
-          <p className="mt-6 text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            {"A curated collection of my work, from full-stack applications to open-source contributions. Each project represents unique challenges and growth."}
-          </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center gap-4 mb-6 animate-fade-in-up">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
+                  <Folder className="h-6 w-6 text-primary" />
+                </div>
+                <span className="text-sm font-medium text-primary uppercase tracking-wider">Portfolio</span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance animate-fade-in-up delay-100">
+                All projects.
+              </h1>
+              <p className="mt-6 text-xl text-muted-foreground leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+                {"A curated collection of my work, from full-stack applications to open-source contributions. Each project represents unique challenges and growth."}
+              </p>
 
-          {/* Project count */}
-          <div className="mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-card/50 border border-border/30">
-            <span className="text-2xl font-bold text-primary">{projects.length}</span>
-            <span className="text-sm text-muted-foreground">Projects & Counting</span>
+              {/* Project count */}
+              <div className="mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-card/50 border border-border/30 animate-fade-in-up delay-300">
+                <span className="text-2xl font-bold text-primary">{projects.length}</span>
+                <span className="text-sm text-muted-foreground">Projects & Counting</span>
+              </div>
+            </div>
+
+            {/* Developer Skills Lottie - right side on desktop */}
+            <div className="hidden lg:flex items-center justify-center animate-fade-in-up delay-400">
+              <LottieAnimation
+                animationData={developerSkillsData}
+                className="w-full max-w-md"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <SectionContainer className="pt-0">
+      <SectionContainer className="pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project, index) => (
+            index < 2 ? (
+              <ProjectCard key={project.id} project={project} />
+            ) : (
+              <AnimatedSection key={project.id} delay={80 * (index + 1)}>
+                <ProjectCard project={project} />
+              </AnimatedSection>
+            )
           ))}
         </div>
       </SectionContainer>

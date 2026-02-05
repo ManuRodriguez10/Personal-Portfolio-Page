@@ -70,10 +70,10 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild className="h-14 px-8 text-base rounded-xl gap-2 bg-transparent border-border/50 hover:bg-muted/50 hover:border-border hover-lift transition-all duration-300 hover:scale-[1.02] active:scale-[0.99]">
-                <Link href="/resume">
+                <a href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">
                   <Download className="h-5 w-5" />
                   Resume
-                </Link>
+                </a>
               </Button>
             </div>
 
