@@ -27,9 +27,6 @@ export function Footer() {
               </div>
               <span className="text-lg font-semibold text-foreground">{profile.fullName}</span>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Building modern, clean web experiences with a focus on frontend and UI/UX.
-            </p>
           </div>
 
           {/* Navigation */}
