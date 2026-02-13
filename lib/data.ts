@@ -22,6 +22,7 @@ export const projects: Project[] = [
     tech: ["React", "Vite", "Supabase", "PostgreSQL", "Tailwind CSS", "Radix UI"],
     githubUrl: "https://github.com/ManuRodriguez10/Match-Fit",
     liveUrl: "https://drive.google.com/file/d/1wm75iw22IcswkFDzjEpNKi3MysOtuNT-/view?usp=sharing",
+    deploymentUrl: "https://match-fit-one.vercel.app/",
     featured: true,
     timeline: "4 months (Ongoing)",
     role: "Senior Thesis",
@@ -114,40 +115,37 @@ export const projects: Project[] = [
 ]
 
 export const skills = [
-  { category: "Languages", items: ["Python", "Java", "JavaScript", "HTML", "CSS"] },
-  { category: "Frontend", items: ["React"] },
-  { category: "Backend", items: ["Django", "SQL", "Supabase"] },
-  { category: "Tools", items: ["Cursor", "Google Workspace", "Microsoft Office Suite"] },
+  { category: "Technical Proficiency", items: ["Python", "Java", "HTML", "CSS", "JavaScript", "React", "Django", "SQL", "Supabase", "Google Workspace", "Microsoft Office Suite"] },
 ]
 
 export const experience = [
-  {
-    title: "Venture Planning Intern",
-    company: "Suncoast Venture Studio",
-    period: "August 2025 — Present",
-    location: "Sarasota, FL",
-    description: "Supported evaluation of early-stage startups by conducting market research, competitive analysis, and financial feasibility assessments. Collaborated with founders and mentors to refine business models and go-to-market strategies. Researched and evaluated tech stacks, large language models (LLMs), and AI integration opportunities to guide product and platform development.",
-  },
   {
     title: "Teaching Assistant: Software Engineering, Object Oriented Programming",
     company: "Computer Science Department, New College of Florida",
     period: "January 2025 — Present",
     location: "Sarasota, FL",
-    description: "Provided tutoring support to students struggling with object-oriented programming concepts, using one-on-one sessions and group workshops to enhance understanding and application of these concepts in Java. Collaborated with the course professor to review and refine course materials, ensuring clarity, accuracy, and educational effectiveness. Graded assignments, offering detailed, actionable feedback to students that focused on both strengths and areas for improvement to foster skill development and academic growth.",
+    description: "Provided tutoring support to students struggling with object-oriented programming concepts, using one-on-one sessions and group workshops to enhance understanding and application of these concepts in Java. Collaborated with the course professor to review and refine course materials, ensuring clarity, accuracy, and educational effectiveness before distribution to students. Graded assignments, offering detailed, actionable feedback to students that focused on both strengths and areas for improvement to foster skill development and academic growth.",
   },
   {
     title: "Student Assistant",
     company: "Jane Bancroft Cook Library, New College of Florida",
     period: "January 2024 — Present",
     location: "Sarasota, FL",
-    description: "Modernized library resources by digitizing and archiving senior thesis documents, utilizing advanced scanning equipment to enhance accessibility and preservation. Enhanced visitor experience by providing reception services, assisting with inquiries, and directing phone calls. Supported educational technology integration by assisting visitors with makerspace tools, including 3D printers and virtual reality sets.",
+    description: "Modernized library resources by digitizing and archiving senior thesis documents, utilizing advanced scanning equipment to enhance accessibility and preservation. Enhanced visitor experience by providing reception services, assisting with inquiries, and directing phone calls to ensure efficient communication and visitor satisfaction. Supported educational technology integration by assisting visitors with makerspace tools, including 3D printers and virtual reality sets, fostering an innovative learning environment.",
+  },
+  {
+    title: "Venture Planning Intern",
+    company: "Suncoast Venture Studio",
+    period: "August 2025 — January 2026",
+    location: "Sarasota, FL",
+    description: "Supported evaluation of early-stage startups by conducting market research, competitive analysis, and financial feasibility assessments. Collaborated with founders and mentors to refine business models and go-to-market strategies. Researched and evaluated tech stacks, large language models (LLMs), and AI integration opportunities to guide product and platform development.",
   },
   {
     title: "Student Assistant",
     company: "Athletic Admissions Department, New College of Florida",
     period: "October 2023 — November 2024",
     location: "Sarasota, FL",
-    description: "Assisted prospective student-athletes with the application process, ensuring timely submission of all required documents and maintaining communication to address any issues. Conducted informative calls, offering personalized guidance to prospective students and their families about academic programs, campus life, and admission criteria. Organized and managed the submission of application materials, streamlining the process and maintaining accurate records for compliance.",
+    description: "Assisted prospective student-athletes with the application process, ensuring timely submission of all required documents and maintaining communication to address any issues. Conducted informative calls, offering personalized guidance to prospective students and their families about academic programs, campus life, and admission criteria. Organized and managed the submission of application materials, streamlining the process to improve efficiency and applicant experience, and maintaining accurate records for compliance.",
   },
 ]
 

@@ -11,6 +11,7 @@ export interface Project {
   tech: string[]
   githubUrl: string
   liveUrl: string
+  deploymentUrl?: string
   featured?: boolean
   timeline?: string
   role?: string

@@ -5,7 +5,7 @@ import { TechBadge } from "@/components/tech-badge"
 import { Button } from "@/components/ui/button"
 import { ProjectImageCarousel } from "@/components/project-image-carousel"
 import { projects, profile } from "@/lib/data"
-import { ArrowLeft, ExternalLink, Github, Calendar, User, Layers } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github, Calendar, User, Layers, Globe } from "lucide-react"
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>
@@ -79,6 +79,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               {/* Links */}
               <div className="flex flex-wrap gap-3 pt-1">
+                {project.deploymentUrl && (
+                  <Button asChild size="default" className="h-10 px-6 rounded-xl gap-2 shadow-lg shadow-primary/25">
+                    <a href={project.deploymentUrl} target="_blank" rel="noopener noreferrer">
+                      <Globe className="h-4 w-4" />
+                      Visit Site
+                    </a>
+                  </Button>
+                )}
                 {project.liveUrl && project.liveUrl !== "#" && (
                   <Button asChild size="default" className="h-10 px-6 rounded-xl gap-2 shadow-lg shadow-primary/25">
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -219,6 +227,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               {/* Links */}
               <div className="mt-10 flex flex-wrap gap-4">
+                {project.deploymentUrl && (
+                  <Button asChild size="lg" className="h-14 px-8 rounded-xl gap-2 shadow-lg shadow-primary/25">
+                    <a href={project.deploymentUrl} target="_blank" rel="noopener noreferrer">
+                      <Globe className="h-5 w-5" />
+                      Visit Site
+                    </a>
+                  </Button>
+                )}
                 <Button asChild size="lg" className="h-14 px-8 rounded-xl gap-2 shadow-lg shadow-primary/25">
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-5 w-5" />
