@@ -17,6 +17,8 @@ export interface Project {
   role?: string
   type?: string
   images?: string[]
+  heroImage?: string
+  year?: number
 }
 
 interface ProjectCardProps {
@@ -68,15 +70,15 @@ export function ProjectCard({ project, variant = "default" }: ProjectCardProps) 
       )}
     >
       {/* Image or Placeholder - zoom on hover (Aave-style) */}
-      <div 
+      <div
         className={cn(
           "relative aspect-video w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50",
           isFeatured && "md:w-1/2 md:aspect-auto md:min-h-[320px]"
         )}
       >
-        {project.images && project.images.length > 0 ? (
+        {project.heroImage || (project.images && project.images.length > 0) ? (
           <Image
-            src={project.images[0]}
+            src={project.heroImage || project.images![0]}
             alt={`${project.title} preview`}
             fill
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"

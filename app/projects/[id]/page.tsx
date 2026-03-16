@@ -39,7 +39,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound()
   }
 
-  const useEnhancedLayout = project.id === 'matchfit' || project.id === 'scent-society' || project.id === 'vibing-sarasota' || project.id === 'nsae-web-app' || project.id === 'banyan-board'
+  const useEnhancedLayout = project.id === 'matchfit' || project.id === 'scent-society' || project.id === 'vibing-sarasota' || project.id === 'nsae-web-app' || project.id === 'banyan-board' || project.id === 'matchfit-mobile' || project.id === 'insurance-payment'
 
   // Side-by-side layout for featured projects
   if (useEnhancedLayout) {
@@ -50,8 +50,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
         
         <div className="relative mx-auto w-full max-w-[1500px] px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-start">
-            {/* Left: Content - 60% */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-center">
+            {/* Left: Content */}
             <div className="flex flex-col justify-center space-y-4">
               {/* Back Link */}
               <Link
@@ -174,10 +174,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 </div>
               </div>
 
-              {/* Bottom-right: Carousel - wider aspect ratio */}
-              <div className="w-full">
+              {/* Bottom-right: Carousel */}
+              <div className={project.id === 'matchfit-mobile' ? "max-w-[380px] mx-auto" : "w-full"}>
                 <div className="rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 shadow-2xl shadow-black/10 p-3">
-                  <div className="aspect-[16/9] w-full">
+                  <div className={project.id === 'matchfit-mobile' ? "aspect-[9/15] w-full" : "aspect-[16/9] w-full"}>
                     <ProjectImageCarousel images={project.images ?? []} projectTitle={project.title} projectId={project.id} />
                   </div>
                 </div>

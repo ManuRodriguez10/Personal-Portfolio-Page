@@ -1,5 +1,5 @@
 import { SectionContainer } from "@/components/section-container"
-import { ProjectCard } from "@/components/project-card"
+import { ProjectsByYear } from "@/components/projects-by-year"
 import { projects } from "@/lib/data"
 import { Folder } from "lucide-react"
 
@@ -65,11 +65,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
       </section>
 
       <SectionContainer className="pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <ProjectsByYear projects={projects} />
       </SectionContainer>
     </>
   )

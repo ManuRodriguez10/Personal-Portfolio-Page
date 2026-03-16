@@ -16,7 +16,51 @@ export const profile = {
 
 export const projects: Project[] = [
   {
+    id: "insurance-payment",
+    year: 2026,
+    title: "Insurance Payment Receipt Automation System",
+    description: "A modular web application developed for Franco Fernández & Asociados to automate the processing of insurance payment receipts. The system uses the OpenAI API to analyze uploaded PDF receipts and automatically extract structured data such as receipt number, client name, policy numbers, dates, and payment amounts. Users can review and edit the extracted information through a side-by-side verification interface before importing it into a centralized database. The platform also includes filtering, Excel export functionality, and a feedback system that stores user instructions to continuously improve the AI agent's accuracy over time.",
+    tech: ["React", "Supabase", "OpenAI API"],
+    githubUrl: "",
+    liveUrl: "https://drive.google.com/file/d/1v0RxoLGlg6qnDuEMMSxZM7_g1Urfa-4K/view?usp=sharing",
+    featured: false,
+    timeline: "1 week",
+    role: "Software Developer",
+    type: "Web Application",
+    images: [
+      "/assets/insurance-payment-1.png",
+      "/assets/insurance-payment-2.png",
+      "/assets/insurance-payment-3.png",
+    ],
+  },
+  {
+    id: "matchfit-mobile",
+    year: 2026,
+    title: "MatchFit Mobile",
+    description: "A mobile version of the MatchFit platform built using React Native, designed to bring the same fitness matching experience to smartphones. The application integrates Supabase and Firebase to handle authentication, real-time data, and backend services, allowing users to connect, and engage with the platform seamlessly on mobile devices.",
+    tech: ["React Native", "Supabase", "Firebase"],
+    githubUrl: "https://github.com/ManuRodriguez10/MatchFit-Mobile",
+    liveUrl: "https://drive.google.com/file/d/16qj3PghDXRxGHeYIxseDzrE2Zr2i0KsK/view?usp=sharing",
+    featured: true,
+    timeline: "1 month",
+    role: "Personal Project",
+    type: "Mobile Application",
+    heroImage: "/assets/matchfit-mobile-hero.png",
+    images: [
+      "/assets/matchfit-mobile-1.png",
+      "/assets/matchfit-mobile-2.png",
+      "/assets/matchfit-mobile-3.png",
+      "/assets/matchfit-mobile-4.png",
+      "/assets/matchfit-mobile-5.png",
+      "/assets/matchfit-mobile-6.png",
+      "/assets/matchfit-mobile-7.png",
+      "/assets/matchfit-mobile-8.png",
+      "/assets/matchfit-mobile-9.png",
+    ],
+  },
+  {
     id: "matchfit",
+    year: 2026,
     title: "MatchFit",
     description: "Built a full-stack soccer team management web app using React and Supabase with role-based authentication and multi-stage onboarding for coaches and players. Implemented team creation and invite-code onboarding, enabling players to join teams and complete profile setup with positions and jersey numbers. Developed real-time, role-specific dashboards displaying team stats, upcoming events, published lineups, and roster counts. Built an interactive lineup builder with multiple formations and drag-and-drop player positioning on a visual soccer field. Ensured secure, role-based data access with Supabase Row-Level Security, and delivered a modern, accessible UI using Tailwind CSS, Radix UI, Framer Motion, and robust form validation.",
     tech: ["React", "Vite", "Supabase", "PostgreSQL", "Tailwind CSS", "Radix UI"],
@@ -40,6 +84,7 @@ export const projects: Project[] = [
   },
   {
     id: "vibing-sarasota",
+    year: 2025,
     title: "Vibing Sarasota",
     description: "A web application using React and Supabase to showcase local businesses and attractions in Sarasota, Florida. Implemented category-based browsing (Beaches, Food & Dining, Hotels, Golf Spots, Shopping, Exercise Spots) and search to help users discover local spots. Built dynamic interfaces with React and Tailwind CSS, enabling users to browse curated listings, view business details with images and descriptions and access to Google Maps links. Integrated React Query for efficient data fetching and caching. Used Supabase's PostgreSQL backend to store and manage user-submitted suggestions, including a \"Suggest a Spot\" form with validation and submission handling.",
     tech: ["React", "Vite", "Supabase", "PostgreSQL", "Tailwind CSS", "React Query"],
@@ -58,6 +103,7 @@ export const projects: Project[] = [
   },
   {
     id: "scent-society",
+    year: 2025,
     title: "Scent Society",
     description: "Built a full-stack e-commerce web application for browsing and purchasing premium colognes using React and Django. Implemented gender-based product categories (Men's and Women's collections) with scent type filtering (Fresh, Citrus, Night, Spicy, Sweet, Floral, Romantic) to help users discover fragrances that match their preferences. Developed dynamic product interfaces with React and Tailwind CSS, featuring interactive image carousels for product details, realtime shopping cart management, and a multi-step checkout process with promo code validation. Implemented protected routes using React Router to secure authenticated user features like cart access and order placement. Built a secure Django REST API backend with JWT token-based authentication, email verification system for new user registration, and PostgreSQL-backed data models to manage users, product catalogs, and shopping cart persistence. Designed separate cart systems for men's and women's products with full CRUD operations for cart item management.",
     tech: ["React", "Vite", "Django", "Tailwind CSS", "PostgreSQL", "JWT", "React Router"],
@@ -80,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     id: "banyan-board",
+    year: 2025,
     title: "Banyan Board",
     description: "A user-friendly interface using HTML to provide real-time updates on campus events, homework deadlines, and other academic activities, enhancing student engagement and daily planning efficiency. Developed key features including a comprehensive to-do list, interactive pop-up messages, and robust student calendar functionalities using JavaFX. These features enable students to manage and track their academic tasks, stay informed about urgent updates, and efficiently plan their schedules with visual aids and timely alerts.",
     tech: ["HTML", "Java", "JavaFX"],
@@ -96,6 +143,7 @@ export const projects: Project[] = [
   },
   {
     id: "nsae-web-app",
+    year: 2025,
     title: "NSAE Web App",
     description: "A comprehensive web application using Django and React for a non-profit animal shelter, aimed at boosting volunteer engagement and streamlining event management. Implemented advanced user authentication and registration systems to facilitate easy sign-up processes for new volunteers. Engineered dynamic user interfaces with React that allow registered volunteers to easily access information on upcoming events, log volunteer hours, and interact with the platform in a user-friendly manner. Leveraged Django's robust backend capabilities to enable detailed activity tracking and generate intuitive reports and dashboards for administrative staff.",
     tech: ["Django", "React"],
