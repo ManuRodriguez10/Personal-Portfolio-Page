@@ -1,159 +1,42 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import { Button } from "@/components/ui/button"
 import { SectionContainer } from "@/components/section-container"
-import { ProjectCard } from "@/components/project-card"
 import { SkillsCarousel } from "@/components/skills-carousel"
 import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
-import { LottieAnimation } from "@/components/lottie-animation"
-import { projects, skills, profile } from "@/lib/data"
-import { ArrowRight, Download, Github, Linkedin, GraduationCap, Globe } from "lucide-react"
+import { skills } from "@/lib/data"
+import { SelectedWork } from "@/components/selected-work"
 
-// Import animation data
-import animationData from "@/public/animations/isometric-data-analysis.json"
-import webDevelopmentData from "@/public/animations/web-development.json"
 
 export const metadata: Metadata = {
   title: "Home | Manuel Rodriguez",
 }
 
 export default function HomePage() {
-  const featuredProjects = projects.filter((p) => p.featured)
-
   return (
     <>
-      {/* Hero Section - Aave-style entrance animations (background from DynamicBackground) */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="max-w-4xl">
-            {/* Manuel Rodriguez Card */}
-            <div className="animate-fade-in-up delay-400">
-              <div className="rounded-3xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
-                <div className="p-8 sm:p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-                  <div className="max-w-3xl mx-auto text-center">
-                    <div className="flex h-24 w-24 mx-auto items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
-                      <span className="text-3xl font-bold text-primary">MR</span>
-                    </div>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-                      {profile.fullName}
-                    </h2>
-                    <p className="mt-3 text-xl text-primary font-medium">{profile.title}</p>
-                    <p className="mt-4 text-base text-muted-foreground">
-                      {profile.address} • {profile.email} • {profile.phone}
-                    </p>
-                    <div className="mt-6 flex items-center justify-center gap-3">
-                      {[
-                        { icon: Github, label: "GitHub", href: profile.githubUrl },
-                        { icon: Linkedin, label: "LinkedIn", href: profile.linkedinUrl },
-                        { icon: Globe, label: "Portfolio", href: "/" },
-                      ].map((link) => (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          target={link.href.startsWith("http") ? "_blank" : undefined}
-                          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
-                          aria-label={link.label}
-                        >
-                          <link.icon className="h-5 w-5" />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA buttons - hover lift, glow, animated gradient (SVGator liquid/gradient) */}
-            <div className="mt-12 flex flex-wrap gap-4 justify-center animate-fade-in-up delay-500">
-              <Button asChild size="lg" className="h-14 px-8 text-base rounded-xl gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover-lift hover-lift-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] group focus-ring-animate cta-gradient-animate border-0 focus-visible:ring-0">
-                <Link href="/projects" className="inline-flex items-center gap-2">
-                  View My Work
-                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild className="h-14 px-8 text-base rounded-xl gap-2 bg-transparent border-border/50 hover:bg-muted/50 hover:border-border hover-lift transition-all duration-300 hover:scale-[1.02] active:scale-[0.99]">
-                <a href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">
-                  <Download className="h-5 w-5" />
-                  Resume
-                </a>
-              </Button>
-            </div>
-
-            </div>
-
-            {/* Web Development Lottie - right side on desktop */}
-            <div className="hidden lg:flex items-center justify-center animate-fade-in-up delay-600">
-              <LottieAnimation
-                animationData={webDevelopmentData}
-                className="w-full max-w-md"
-              />
-            </div>
+      <section className="home-hero" aria-labelledby="hero-heading">
+        <div className="home-hero-inner">
+          <p className="home-hero-label">FULL-STACK SOFTWARE ENGINEER</p>
+          <h1 id="hero-heading" className="home-hero-heading">
+            Turning my passion into software solutions.
+          </h1>
+          <p className="home-hero-description">
+            I’m Manuel Rodriguez, a full-stack software engineer creating web applications,
+            sports technology, and AI-powered business tools.
+          </p>
+          <div className="home-hero-actions">
+            <Link href="/projects" className="home-hero-button home-hero-button-primary">
+              View my work
+            </Link>
+            <a href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf" className="home-hero-button home-hero-button-secondary">
+              Download résumé
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Key highlights: simple 3-column grid, each card has text + icon in flex layout */}
-      <SectionContainer>
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-10 lg:mb-12 [&_svg]:h-auto" aria-label="Key highlights">
-            <svg viewBox="0 0 450 80" className="w-full max-w-[320px] mx-auto" preserveAspectRatio="xMinYMid meet">
-              <defs>
-<linearGradient id="key-highlights-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--foreground)" />
-                <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
-                <stop offset="100%" stopColor="var(--foreground)" />
-              </linearGradient>
-              </defs>
-              <text x="50%" y="52" textAnchor="middle" fill="url(#key-highlights-gradient)" className="font-bold" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "52px", letterSpacing: "-0.025em" }}>
-                Key highlights
-              </text>
-            </svg>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 md:auto-rows-fr">
-            {/* Expected graduation - top left */}
-            <AnimatedSection variant="statCard" delay={0} className="md:row-span-1">
-              <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
-                <div className="flex flex-col justify-center">
-                  <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">May 2026</p>
-                  <p className="mt-1 text-base lg:text-lg text-foreground/80">Expected graduation.</p>
-                </div>
-                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-50 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
-                  <GraduationCap className="w-full h-full" />
-                </div>
-              </div>
-            </AnimatedSection>
-            {/* Projects built - right, spans both rows */}
-            <AnimatedSection variant="statCard" delay={100} className="md:row-span-2 md:min-h-0">
-              <div className="flex flex-col items-center justify-center text-center min-h-[280px] md:min-h-full rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover gap-4">
-                <p className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight">{projects.length}</p>
-                <p className="text-lg lg:text-xl text-foreground/80">Projects built.</p>
-                <div className="w-64 h-64 lg:w-80 lg:h-80 opacity-70 flex items-center justify-center mt-1" aria-hidden>
-                  <LottieAnimation animationData={animationData} className="w-full h-full" />
-                </div>
-              </div>
-            </AnimatedSection>
-            {/* Related coursework - bottom left */}
-            <AnimatedSection variant="statCard" delay={200} className="md:row-span-1">
-              <div className="flex items-stretch justify-between gap-4 min-h-[280px] rounded-xl border border-border/80 bg-muted/40 p-8 lg:p-10 stat-card-hover">
-                <div className="flex flex-col justify-center">
-                  <p className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">10+</p>
-                  <p className="mt-1 text-base lg:text-lg text-foreground/80">Related coursework.</p>
-                </div>
-                <div className="shrink-0 w-28 h-28 lg:w-32 lg:h-50 opacity-70 flex items-center justify-center text-primary/70 animate-decorative-breathe" aria-hidden>
-                  <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full">
-                    <rect x="16" y="48" width="12" height="24" rx="3" opacity="0.6" />
-                    <rect x="34" y="36" width="12" height="36" rx="3" opacity="0.8" />
-                    <rect x="52" y="24" width="12" height="48" rx="3" opacity="1" />
-                  </svg>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </SectionContainer>
+      <SelectedWork />
 
       {/* Skills Section - ongoing carousel (Aave-style) - first after hero */}
       <SectionContainer className="relative bg-muted/20">
@@ -185,57 +68,6 @@ export default function HomePage() {
         </AnimatedSection>
       </SectionContainer>
 
-      {/* Featured Projects Section - scroll-triggered reveal + line draw */}
-      <SectionContainer id="projects" className="relative">
-        <AnimatedSection className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
-          <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-balance [&_svg]:max-w-full [&_svg]:h-auto" aria-label="Featured projects">
-              <svg viewBox="0 0 420 64" className="w-full max-w-md" preserveAspectRatio="xMinYMid meet">
-                <defs>
-                  <linearGradient id="featured-projects-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="var(--foreground)" />
-                    <stop offset="50%" stopColor="var(--primary)" className="gradient-fade-stop" />
-                    <stop offset="100%" stopColor="var(--foreground)" />
-                  </linearGradient>
-                </defs>
-                <text x="0" y="42" fill="url(#featured-projects-gradient)" style={{ fontFamily: "var(--font-sans), system-ui, sans-serif", fontSize: "42px", fontWeight: 700, letterSpacing: "-0.025em" }}>
-                  Featured projects.
-                </text>
-              </svg>
-            </h2>
-            <div className="mt-4 text-primary opacity-100">
-              <DrawingLine width="100px" strokeWidth={4} />
-            </div>
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-              A selection of recent work that showcases my skills and approach to problem-solving.
-            </p>
-          </div>
-          <Link
-            href="/projects"
-            className="group hidden sm:inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-primary rounded-xl border border-primary/20 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent hover:border-primary/40 hover:bg-primary/20 hover-lift hover-underline transition-all duration-300"
-          >
-            View all projects
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {featuredProjects.slice(0, 4).map((project, i) => (
-            <AnimatedSection key={project.id} delay={80 * (i + 1)}>
-              <ProjectCard project={project} variant="teaser" />
-            </AnimatedSection>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <Button variant="outline" asChild className="w-full h-14 text-base rounded-xl gap-2 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/20 hover:text-primary">
-            <Link href="/projects">
-              View all projects
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
-        </div>
-      </SectionContainer>
     </>
   )
 }
