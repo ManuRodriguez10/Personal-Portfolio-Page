@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react"
 
-export function WorkReveal({ children, className }: { children: ReactNode; className?: string }) {
+export function WorkReveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function WorkReveal({ children, className }: { children: ReactNode; class
         animation = element.animate([
           { opacity: 0, transform: "translateY(16px)" },
           { opacity: 1, transform: "translateY(0)" },
-        ], { duration: 550, easing: "ease-out" })
+        ], { duration: 550, delay, easing: "ease-out", fill: "backwards" })
       }
     }, { threshold: 0.08 })
     const onMotionChange = () => { if (reducedMotion.matches) animation?.cancel() }
@@ -28,7 +28,7 @@ export function WorkReveal({ children, className }: { children: ReactNode; class
       animation?.cancel()
       reducedMotion.removeEventListener("change", onMotionChange)
     }
-  }, [])
+  }, [delay])
 
   return <div ref={ref} className={className}>{children}</div>
 }

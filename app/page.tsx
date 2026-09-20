@@ -6,6 +6,8 @@ import { AnimatedSection } from "@/components/animated-section"
 import { DrawingLine } from "@/components/drawing-line"
 import { skills } from "@/lib/data"
 import { SelectedWork } from "@/components/selected-work"
+import { Capabilities } from "@/components/capabilities"
+import { Background } from "@/components/background"
 
 
 export const metadata: Metadata = {
@@ -37,6 +39,8 @@ export default function HomePage() {
       </section>
 
       <SelectedWork />
+      <Capabilities />
+      <Background />
 
       {/* Skills Section - ongoing carousel (Aave-style) - first after hero */}
       <SectionContainer className="relative bg-muted/20">
