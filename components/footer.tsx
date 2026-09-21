@@ -1,83 +1,39 @@
-import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
-import { profile } from "@/lib/data"
+import { Geist } from "next/font/google"
+import "./footer.css"
 
-const socialLinks = [
-  { label: "GitHub", href: profile.githubUrl, icon: Github },
-  { label: "LinkedIn", href: profile.linkedinUrl, icon: Linkedin },
-  { label: "Email", href: `mailto:${profile.email}`, icon: Mail },
-]
+const sans = Geist({ subsets: ["latin"], variable: "--footer-sans" })
 
 const footerLinks = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Resume", href: "/resume" },
+  { label: "Home", href: "/", external: false },
+  { label: "Projects", href: "/projects", external: false },
+  { label: "Resume", href: "/resume.pdf", external: false },
+  { label: "GitHub", href: "https://github.com/ManuRodriguez10", external: true },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/manuel-rodriguez-a783b9235/", external: true },
+  { label: "Email", href: "mailto:m.rodriguez25@ncf.edu", external: false },
 ]
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/30 bg-background/50">
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                <span className="text-lg font-bold text-primary">M</span>
-              </div>
-              <span className="text-lg font-semibold text-foreground">{profile.fullName}</span>
-            </div>
+    <footer className={`site-footer ${sans.variable}`}>
+      <div className="site-footer-inner">
+        <div className="site-footer-primary">
+          <div className="site-footer-identity">
+            <p className="site-footer-name">Manuel Rodriguez</p>
+            <p className="site-footer-role">Full-Stack Software Engineer</p>
           </div>
-
-          {/* Navigation */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
-              Navigation
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="hover-underline inline-block text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
-              Connect
-            </h3>
-            <div className="flex items-center gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover-icon flex h-10 w-10 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
-          </div>
+          <nav className="site-footer-links" aria-label="Footer navigation">
+            {footerLinks.map((link) => link.external ? (
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+            ) : link.href.startsWith("/") ? (
+              <Link key={link.label} href={link.href}>{link.label}</Link>
+            ) : (
+              <a key={link.label} href={link.href}>{link.label}</a>
+            ))}
+          </nav>
         </div>
-
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground/70">
-            © {new Date().getFullYear()} {profile.fullName}. All rights reserved.
-          </p>
-          <p className="text-xs text-muted-foreground/70">
-            Built with Next.js & Tailwind CSS
-          </p>
+        <div className="site-footer-secondary">
+          <p>© 2026 Manuel Rodriguez. All rights reserved.</p>
         </div>
       </div>
     </footer>
