@@ -1,218 +1,202 @@
 import Link from "next/link"
-import { SectionContainer } from "@/components/section-container"
-import { AnimatedSection } from "@/components/animated-section"
-import { TechBadge } from "@/components/tech-badge"
-import { Button } from "@/components/ui/button"
-import { experience, education, skills, profile, relatedCourses, languages } from "@/lib/data"
-import { Download, Briefcase, GraduationCap, FileText, Github, Linkedin, Globe, BookOpen, Languages } from "lucide-react"
+import { Geist, Geist_Mono } from "next/font/google"
+import { Contact } from "@/components/contact"
+import { WorkReveal } from "@/components/work-reveal"
+import "./resume.css"
+
+const sans = Geist({ subsets: ["latin"], variable: "--resume-sans" })
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--resume-mono" })
 
 export const metadata = {
-  title: `Resume | ${profile.fullName}`,
-  description: `Professional experience, education, and skills — ${profile.title} at New College of Florida.`,
+  title: "Resume | Manuel Rodriguez",
+  description: "Experience, selected projects, technical skills, and education for Manuel Rodriguez.",
 }
+
+const experiences = [
+  {
+    dates: "JAN 2025 - MAY 2026",
+    title: "Teaching Assistant - Software Engineering and Object-Oriented Programming",
+    organization: "Computer Science Department, New College of Florida",
+    location: "Sarasota, Florida",
+    bullets: [
+      "Support students through individual tutoring and group workshops focused on Java, object-oriented programming, and software engineering.",
+      "Review course materials with the professor to improve clarity, accuracy, and educational effectiveness.",
+      "Grade assignments and provide detailed, actionable technical feedback that helps students strengthen their work.",
+    ],
+  },
+  {
+    dates: "2026",
+    title: "Full-Stack Software Engineer - Client Project",
+    organization: "Franco Fernández & Asociados",
+    bullets: [
+      "Developed an AI-powered workflow that processes uploaded insurance payment receipts and extracts structured payment information.",
+      "Built a side-by-side verification experience so staff can review and correct extracted data before approval.",
+      "Used React, Supabase, and the OpenAI API to store clean records and support reporting and export workflows.",
+    ],
+  },
+  {
+    dates: "AUG 2025 - JAN 2026",
+    title: "Venture Planning Intern",
+    organization: "Suncoast Venture Studio",
+    location: "Sarasota, Florida",
+    bullets: [
+      "Conducted market research, competitive analysis, and financial feasibility assessments for early-stage startups.",
+      "Collaborated with founders and mentors to refine business models and go-to-market strategies.",
+      "Researched technology stacks, large language models, and AI integration opportunities for product development.",
+    ],
+  },
+]
+
+const selectedProjects = [
+  {
+    category: "CAPSTONE PROJECT",
+    title: "MatchFit",
+    description: "A soccer team management platform for coaches and players, with role-based dashboards, team and roster management, event scheduling, and an interactive matchday lineup builder.",
+    stack: "REACT · VITE · SUPABASE · POSTGRESQL · TAILWIND CSS · RADIX UI",
+    href: "/projects/matchfit",
+  },
+  {
+    category: "MOBILE APPLICATION",
+    title: "MatchFit Mobile",
+    description: "A React Native version of the MatchFit platform that brings its connected soccer experience to smartphones using Supabase and Firebase-backed services.",
+    stack: "REACT NATIVE · SUPABASE · FIREBASE",
+    href: "/projects/matchfit-mobile",
+  },
+  {
+    category: "ACADEMIC PROJECT",
+    title: "Scent Society",
+    description: "A full-stack e-commerce application built with React and Django for fragrance discovery, authenticated shopping, real-time cart management, and a multi-step checkout experience.",
+    stack: "REACT · VITE · DJANGO · POSTGRESQL · JWT · TAILWIND CSS",
+    href: "/projects/scent-society",
+  },
+]
+
+const skillGroups = [
+  { label: "LANGUAGES", skills: ["JavaScript", "Python", "Java", "SQL", "HTML", "CSS"] },
+  { label: "FRONTEND", skills: ["React", "Vite", "Tailwind CSS", "Radix UI"] },
+  { label: "BACKEND", skills: ["Django", "Django REST Framework", "Supabase", "REST APIs"] },
+  { label: "DATABASES & AUTH", skills: ["PostgreSQL", "Supabase Auth", "JWT Authentication", "Row-Level Security"] },
+  { label: "TOOLS & WORKFLOW", skills: ["Google Workspace", "Microsoft Office Suite"] },
+]
+
+const education = [
+  { dates: "AUG 2023 - MAY 2026", degree: "Bachelor of Science in Computer Science", school: "New College of Florida", location: "Sarasota, Florida" },
+  { dates: "AUG 2022 - MAY 2023", degree: "Associate of Business Management", school: "Bryant & Stratton College", location: "Albany, New York" },
+]
 
 export default function ResumePage() {
   return (
-    <>
-      {/* Manuel Rodriguez Header */}
-      <section className="relative pt-12 pb-12">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-1/4 w-1/3 h-1/2 bg-primary/15 rounded-full blur-[100px] opacity-50" />
-        </div>
-        
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="rounded-3xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden animate-fade-in-up">
-            <div className="p-8 sm:p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-              <div className="max-w-3xl mx-auto text-center">
-                <div className="flex h-20 w-20 mx-auto items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6 animate-fade-in-up delay-100">
-                  <span className="text-3xl font-bold text-primary">MR</span>
-                </div>
-                <h1 className="text-3xl sm:text-4xl font-bold text-foreground animate-fade-in-up delay-200">
-                  {profile.fullName}
-                </h1>
-                <p className="mt-2 text-xl text-primary font-medium animate-fade-in-up delay-300">{profile.title}</p>
-                <p className="mt-3 text-muted-foreground animate-fade-in-up delay-400">
-                  {profile.address} • {profile.email} • {profile.phone}
-                </p>
-                <div className="mt-6 flex items-center justify-center gap-3 animate-fade-in-up delay-500">
-                  {[
-                    { icon: Github, label: "GitHub", href: profile.githubUrl },
-                    { icon: Linkedin, label: "LinkedIn", href: profile.linkedinUrl },
-                    { icon: Globe, label: "Portfolio", href: "/" },
-                  ].map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
-                      aria-label={link.label}
-                    >
-                      <link.icon className="h-5 w-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
+    <div className={`resume-page ${sans.variable} ${mono.variable}`}>
+      <section className="resume-hero" aria-labelledby="resume-heading">
+        <div className="resume-container">
+          <WorkReveal>
+            <p className="resume-label resume-label-navy">RESUME</p>
+            <h1 id="resume-heading">Experience across software, education, and product development.</h1>
+            <p className="resume-hero-copy">I’m Manuel Rodriguez, a full-stack software engineer with experience building web applications, developing AI-powered business tools, and supporting students in software engineering and object-oriented programming.</p>
+            <div className="resume-hero-actions">
+              <a className="resume-download-button" href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">Download résumé</a>
+              <Link className="resume-projects-link" href="/projects"><span>View projects</span><span aria-hidden="true">→</span></Link>
             </div>
+          </WorkReveal>
+        </div>
+      </section>
+
+      <section className="resume-section resume-experience" aria-labelledby="experience-heading">
+        <div className="resume-container">
+          <WorkReveal className="resume-section-intro">
+            <p className="resume-label">EXPERIENCE</p>
+            <h2 id="experience-heading">Building, teaching, and solving real problems.</h2>
+          </WorkReveal>
+          <div className="resume-rows">
+            {experiences.map((experience, index) => (
+              <WorkReveal key={experience.title} delay={index * 80}>
+                <article className="resume-row">
+                  <p className="resume-date">{experience.dates}</p>
+                  <div className="resume-row-content">
+                    <h3>{experience.title}</h3>
+                    <p className="resume-organization">{experience.organization}{experience.location && <> · {experience.location}</>}</p>
+                    <ul>{experience.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                  </div>
+                </article>
+              </WorkReveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* My Experience Hero */}
-      <section className="relative pb-12">
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4 animate-fade-in-up">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-              <FileText className="h-5 w-5 text-primary" />
-            </div>
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Resume</span>
-          </div>
-          
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground text-balance animate-fade-in-up delay-100">
-                My experience.
-              </h2>
-              <p className="mt-3 text-base text-muted-foreground leading-relaxed max-w-xl animate-fade-in-up delay-200">
-                A comprehensive overview of my professional journey, education, and skills.
-              </p>
-            </div>
-            <Button asChild size="default" className="h-12 px-6 rounded-xl gap-2 shadow-lg shadow-primary/25 w-full sm:w-auto animate-fade-in-up delay-300">
-              <a href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">
-                <Download className="h-4 w-4" />
-                View Resume
-              </a>
-            </Button>
+      <section className="resume-project-section" aria-labelledby="selected-projects-heading">
+        <div className="resume-container">
+          <WorkReveal className="resume-section-intro">
+            <p className="resume-label resume-label-navy">SELECTED PROJECTS</p>
+            <h2 id="selected-projects-heading">Products developed from idea to implementation.</h2>
+          </WorkReveal>
+          <div className="resume-project-list">
+            {selectedProjects.map((project, index) => (
+              <WorkReveal key={project.title} delay={index * 80}>
+                <article className="resume-project-row">
+                  <p className="resume-project-category">{project.category}</p>
+                  <div className="resume-project-details">
+                    <h3>{project.title}</h3>
+                    <p className="resume-project-description">{project.description}</p>
+                    <p className="resume-project-stack">{project.stack}</p>
+                    <Link className="resume-case-link" href={project.href}><span>View case study</span><span aria-hidden="true">→</span></Link>
+                  </div>
+                </article>
+              </WorkReveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Resume Content */}
-      <SectionContainer className="pt-0">
-        <div className="rounded-3xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
-          {/* Experience */}
-          <AnimatedSection>
-            <div className="p-8 sm:p-12 border-b border-border/30 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20 border border-primary/30">
-                  <Briefcase className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Experience</h3>
-              </div>
-              <div className="space-y-8">
-                {experience.map((job, index) => (
-                  <AnimatedSection key={index} delay={80 * (index + 1)}>
-                    <div className="relative pl-8 border-l-2 border-primary/40">
-                      <div className="absolute left-0 top-1 w-4 h-4 -translate-x-[9px] rounded-full bg-primary border-4 border-primary/20" />
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                        <h4 className="text-lg font-semibold text-foreground">{job.title}</h4>
-                        <span className="text-sm text-foreground/70 font-medium">{job.period}</span>
-                      </div>
-                      <p className="text-primary font-medium mb-3">{job.company}</p>
-                      <p className="text-foreground/80 leading-relaxed">
-                        {job.description}
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Education */}
-          <AnimatedSection>
-            <div className="p-8 sm:p-12 border-b border-border/30 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20 border border-primary/30">
-                  <GraduationCap className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Education</h3>
-              </div>
-              <div className="space-y-8">
-                {education.map((edu, index) => (
-                  <AnimatedSection key={index} delay={80 * (index + 1)}>
-                    <div className="relative pl-8 border-l-2 border-primary/40">
-                      <div className="absolute left-0 top-1 w-4 h-4 -translate-x-[9px] rounded-full bg-primary border-4 border-primary/20" />
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                        <h4 className="text-lg font-semibold text-foreground">{edu.degree}</h4>
-                        <span className="text-sm text-foreground/70 font-medium">{edu.period}</span>
-                      </div>
-                      <p className="text-primary font-medium mb-3">{edu.school}</p>
-                      <p className="text-foreground/80 leading-relaxed">
-                        {edu.description}
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Skills */}
-          <AnimatedSection>
-            <div className="p-8 sm:p-12 border-b border-border/30 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-              <h3 className="text-xl font-semibold text-foreground mb-8">Technical Skills</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {skills.map((skillGroup, index) => (
-                  <AnimatedSection key={skillGroup.category} delay={80 * (index + 1)}>
-                    <div>
-                      <h4 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
-                        {skillGroup.category}
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {skillGroup.items.map((skill) => (
-                          <TechBadge key={skill}>{skill}</TechBadge>
-                        ))}
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Related Courses */}
-          <AnimatedSection>
-            <div className="p-8 sm:p-12 border-b border-border/30 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20 border border-primary/30">
-                  <BookOpen className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Related Courses</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {relatedCourses.map((course, index) => (
-                  <AnimatedSection key={course} delay={20 * (index + 1)}>
-                    <TechBadge>{course}</TechBadge>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Languages */}
-          <AnimatedSection>
-            <div className="p-8 sm:p-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20 border border-primary/30">
-                  <Languages className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Languages</h3>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {languages.map((lang, index) => (
-                  <AnimatedSection key={lang.language} delay={80 * (index + 1)}>
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-foreground">{lang.language}</span>
-                      <span className="text-foreground/70">— {lang.proficiency}</span>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
+      <section className="resume-section resume-skills" aria-labelledby="skills-heading">
+        <div className="resume-container">
+          <WorkReveal className="resume-section-intro">
+            <p className="resume-label">TECHNICAL SKILLS</p>
+            <h2 id="skills-heading">Tools used to build complete products.</h2>
+          </WorkReveal>
+          <div className="resume-skills-grid">
+            {skillGroups.map((group, index) => (
+              <WorkReveal key={group.label} delay={(index % 4) * 70}>
+                <article className="resume-skill-group">
+                  <h3>{group.label}</h3>
+                  <ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+                </article>
+              </WorkReveal>
+            ))}
+          </div>
         </div>
-      </SectionContainer>
-    </>
+      </section>
+
+      <section className="resume-section resume-education" aria-labelledby="education-heading">
+        <div className="resume-container">
+          <WorkReveal className="resume-section-intro">
+            <p className="resume-label">EDUCATION</p>
+            <h2 id="education-heading">Computer science and business foundations.</h2>
+          </WorkReveal>
+          <div className="resume-rows resume-education-rows">
+            {education.map((item, index) => (
+              <WorkReveal key={item.degree} delay={index * 80}>
+                <article className="resume-row resume-education-row">
+                  <p className="resume-date">{item.dates}</p>
+                  <div className="resume-row-content">
+                    <h3>{item.degree}</h3>
+                    <p className="resume-organization">{item.school} · {item.location}</p>
+                  </div>
+                </article>
+              </WorkReveal>
+            ))}
+          </div>
+          <WorkReveal className="resume-languages">
+            <p className="resume-label">LANGUAGES</p>
+            <div className="resume-language-list">
+              <p><strong>Spanish</strong><span>Native</span></p>
+              <p><strong>English</strong><span>Fluent</span></p>
+            </div>
+          </WorkReveal>
+        </div>
+      </section>
+
+      <Contact />
+    </div>
   )
 }

@@ -3,12 +3,12 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Github, Linkedin, Menu, X } from "lucide-react"
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "Resume", href: "/resume" },
 ]
 
 export function Navbar() {
@@ -52,6 +52,14 @@ export function Navbar() {
     <header className="portfolio-header" data-scrolled={scrolled}>
       <nav className="portfolio-nav" aria-label="Main navigation">
         <Link href="/" className="portfolio-brand">Manuel Rodriguez</Link>
+        <div className="portfolio-social-links" aria-label="Social links">
+          <a href="https://github.com/ManuRodriguez10" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Github size={19} aria-hidden="true" />
+          </a>
+          <a href="https://www.linkedin.com/in/manuel-rodriguez-a783b9235/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <Linkedin size={19} aria-hidden="true" />
+          </a>
+        </div>
         <div className="portfolio-desktop-links">{renderLinks()}</div>
         <button type="button" className="portfolio-menu-toggle"
           aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}

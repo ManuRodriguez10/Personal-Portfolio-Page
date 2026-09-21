@@ -7,7 +7,7 @@ const sans = Geist({ subsets: ["latin"], variable: "--footer-sans" })
 const footerLinks = [
   { label: "Home", href: "/", external: false },
   { label: "Projects", href: "/projects", external: false },
-  { label: "Resume", href: "/resume.pdf", external: false },
+  { label: "Resume", href: "/resume", external: false },
   { label: "GitHub", href: "https://github.com/ManuRodriguez10", external: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/manuel-rodriguez-a783b9235/", external: true },
   { label: "Email", href: "mailto:m.rodriguez25@ncf.edu", external: false },

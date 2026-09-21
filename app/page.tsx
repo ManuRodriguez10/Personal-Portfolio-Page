@@ -27,9 +27,9 @@ export default function HomePage() {
             <Link href="/projects" className="home-hero-button home-hero-button-primary">
               View my work
             </Link>
-            <a href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf" className="home-hero-button home-hero-button-secondary">
+            <Link href="/resume" className="home-hero-button home-hero-button-secondary">
               Download résumé
-            </a>
+            </Link>
           </div>
         </div>
       </section>

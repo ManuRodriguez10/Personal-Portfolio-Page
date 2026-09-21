@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google"
+import Link from "next/link"
 import { WorkReveal } from "./work-reveal"
 import "./background.css"
 
@@ -34,9 +35,9 @@ export function Background() {
           <h2 id="background-heading">Engineering knowledge shaped by real-world problems.</h2>
           <p className="background-statement">My background sits at the intersection of software, business, and sport. As a computer science teaching assistant, I help students work through software engineering and object-oriented programming concepts. Outside the classroom, I have applied those skills to real business problems, including building an AI-powered insurance payment automation system.</p>
           <p className="background-statement">More than a decade around soccer continues to shape my interest in sports technology and the way I think about building tools for coaches, players, and teams.</p>
-          <a className="background-resume-link" href="/resume.pdf">
+          <Link className="background-resume-link" href="/resume">
             <span>View my résumé</span><span className="background-arrow" aria-hidden="true">→</span>
-          </a>
+          </Link>
         </WorkReveal>
 
         <div className="background-entries">
