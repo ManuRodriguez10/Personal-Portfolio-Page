@@ -2,12 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Moon, Sun, Menu, X, Github, Linkedin } from "lucide-react"
-import { useTheme } from "next-themes"
-import { useState } from "react"
-import { profile } from "@/lib/data"
+import { useEffect, useState } from "react"
+import { Github, Linkedin, Menu, X } from "lucide-react"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -17,142 +13,65 @@ const navItems = [
 
 export function Navbar() {
   const pathname = usePathname()
-  const { setTheme, theme } = useTheme()
+  const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => { setMobileMenuOpen(false) }, [pathname])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false)
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [mobileMenuOpen])
+
+  const renderLinks = () => navItems.map((item) => {
+    const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+    return item.href.endsWith(".pdf") ? (
+      <a key={item.href} href={item.href} className="portfolio-nav-link" onClick={() => setMobileMenuOpen(false)}>
+        {item.label}
+      </a>
+    ) : (
+      <Link key={item.href} href={item.href} className="portfolio-nav-link" data-active={active}
+        aria-current={active ? "page" : undefined} onClick={() => setMobileMenuOpen(false)}>
+        {item.label}
+      </Link>
+    )
+  })
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl border-b border-border/30">
-      <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-8">
-        {/* Logo */}
-        <Link 
-          href="/" 
-          className="group flex items-center gap-2"
-        >
-          <div className="hover-icon relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all duration-300 group-hover:bg-primary/20 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <span className="text-lg font-bold text-primary">MR</span>
-          </div>
-          <span className="hidden sm:block text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary/90">
-            {profile.fullName}
-          </span>
-        </Link>
-
-        {/* Desktop Navigation - Aave-style underline expand from center */}
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              data-active={pathname === item.href}
-              className={cn(
-                "hover-underline relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Right side actions - icon scale + glow on hover */}
-        <div className="hidden md:flex items-center gap-2">
-          <a
-            href={profile.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-icon flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300"
-            aria-label="GitHub"
-          >
-            <Github className="h-5 w-5" />
+    <header className="portfolio-header" data-scrolled={scrolled}>
+      <nav className="portfolio-nav" aria-label="Main navigation">
+        <Link href="/" className="portfolio-brand">Manuel Rodriguez</Link>
+        <div className="portfolio-social-links" aria-label="Social links">
+          <a href="https://github.com/ManuRodriguez10" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Github size={19} aria-hidden="true" />
           </a>
-          <a
-            href={profile.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-icon flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-5 w-5" />
+          <a href="https://www.linkedin.com/in/manuel-rodriguez-a783b9235/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <Linkedin size={19} aria-hidden="true" />
           </a>
-          <div className="mx-2 h-6 w-px bg-border/50" />
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="h-10 w-10 rounded-xl hover:bg-muted/50"
-          >
-            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
         </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="h-10 w-10 rounded-xl"
-          >
-            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="h-10 w-10 rounded-xl"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            <span className="sr-only">Toggle menu</span>
-          </Button>
-        </div>
+        <div className="portfolio-desktop-links">{renderLinks()}</div>
+        <button type="button" className="portfolio-menu-toggle"
+          aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileMenuOpen} aria-controls="mobile-navigation"
+          onClick={() => setMobileMenuOpen((open) => !open)}>
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </nav>
-
-      {/* Mobile Navigation - slide-in + fade (SVGator microinteraction) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl animate-nav-slide-in">
-          <div className="space-y-1 px-6 py-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "block px-4 py-3 text-base font-medium rounded-xl transition-all duration-300",
-                  pathname === item.href
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="pt-4 mt-4 border-t border-border/30 flex items-center gap-3">
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </div>
+        <nav id="mobile-navigation" className="portfolio-mobile-links" aria-label="Mobile navigation">
+          {renderLinks()}
+        </nav>
       )}
     </header>
   )

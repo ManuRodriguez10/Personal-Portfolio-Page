@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 /* Light mode - Clean minimal with cyan accent (Aave-inspired) */
 :root {
   --background: oklch(0.985 0.002 240);

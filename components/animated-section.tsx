@@ -26,7 +26,7 @@ export function AnimatedSection({
 
   return (
     <Component
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       id={id}
       className={cn(
         animationClass,
