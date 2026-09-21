@@ -17,9 +17,9 @@ export function useInView(options: UseInViewOptions = {}) {
   const ref = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number | null>(null)
   const isInViewRef = useRef(false) // Track state to prevent unnecessary updates
-  const timeoutRef = useRef<number>()
+  const timeoutRef = useRef<number | null>(null)
 
   // Use useLayoutEffect for synchronous viewport check (runs before paint)
   useLayoutEffect(() => {
@@ -61,14 +61,9 @@ export function useInView(options: UseInViewOptions = {}) {
       clearTimeout(timeoutRef.current)
     }
 
-    // Delay observer creation using requestIdleCallback to batch and prevent simultaneous firing
-    // This helps when navigating back and many components mount at once
+    // Delay observer creation briefly to batch components that mount together.
     const scheduleObserver = (callback: () => void) => {
-      if ('requestIdleCallback' in window) {
-        timeoutRef.current = (window as any).requestIdleCallback(callback, { timeout: 100 }) as any
-      } else {
-        timeoutRef.current = window.setTimeout(callback, 10) // Small delay to batch
-      }
+      timeoutRef.current = window.setTimeout(callback, 10)
     }
     
     scheduleObserver(() => {
@@ -123,7 +118,7 @@ export function useInView(options: UseInViewOptions = {}) {
     )
     observerRef.current = observer
     observer.observe(el)
-    }, 0) // Small delay to batch observer creation
+    })
     
     return () => {
       if (timeoutRef.current) {

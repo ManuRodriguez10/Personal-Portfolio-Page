@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { SelectedWork } from "@/components/selected-work"
 import { Capabilities } from "@/components/capabilities"
 import { Background } from "@/components/background"
-import { Contact } from "@/components/contact"
 
 
 export const metadata: Metadata = {
@@ -28,7 +27,7 @@ export default function HomePage() {
               View my work
             </Link>
             <Link href="/resume" className="home-hero-button home-hero-button-secondary">
-              Download résumé
+              Download resume
             </Link>
           </div>
         </div>
@@ -37,9 +36,6 @@ export default function HomePage() {
       <SelectedWork />
       <Capabilities />
       <Background />
-      <Contact />
-
-
     </>
   )
 }

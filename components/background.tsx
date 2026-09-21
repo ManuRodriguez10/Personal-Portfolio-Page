@@ -22,7 +22,7 @@ const entries = [
   {
     category: "SPORT",
     title: "10+ years around soccer",
-    description: "Firsthand experience with the sport informs my interest in building practical technology around the workflows of coaches, players, and teams.",
+    description: "Firsthand experience with the sport including at the collegiate level gives me firsthand insight into the workflows and needs of coaches, players, and teams. This shapes my interest in building practical sports technology.",
   },
 ]
 
@@ -33,10 +33,8 @@ export function Background() {
         <WorkReveal className="background-intro">
           <p className="background-label">BACKGROUND</p>
           <h2 id="background-heading">Engineering knowledge shaped by real-world problems.</h2>
-          <p className="background-statement">My background sits at the intersection of software, business, and sport. As a computer science teaching assistant, I help students work through software engineering and object-oriented programming concepts. Outside the classroom, I have applied those skills to real business problems, including building an AI-powered insurance payment automation system.</p>
-          <p className="background-statement">More than a decade around soccer continues to shape my interest in sports technology and the way I think about building tools for coaches, players, and teams.</p>
           <Link className="background-resume-link" href="/resume">
-            <span>View my résumé</span><span className="background-arrow" aria-hidden="true">→</span>
+            <span>View my resume</span><span className="background-arrow" aria-hidden="true">→</span>
           </Link>
         </WorkReveal>
 

@@ -1,14 +1,19 @@
 "use client"
 
-export function ScrollCue() {
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    const target = document.querySelector<HTMLElement>("#project-overview")
+import type { MouseEvent } from "react"
+import "./scroll-cue.css"
+
+export function ScrollCue({ targetId = "project-overview" }: { targetId?: string }) {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById(targetId)
     if (!target) return
     event.preventDefault()
 
+    const hash = `#${targetId}`
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       target.scrollIntoView()
-      history.replaceState(null, "", "#project-overview")
+      history.replaceState(null, "", hash)
       return
     }
 
@@ -25,14 +30,14 @@ export function ScrollCue() {
         : 1 - Math.pow(-2 * progress + 2, 3) / 2
       window.scrollTo(0, start + distance * eased)
       if (progress < 1) requestAnimationFrame(glide)
-      else history.replaceState(null, "", "#project-overview")
+      else history.replaceState(null, "", hash)
     }
 
     requestAnimationFrame(glide)
   }
 
   return (
-    <a className="case-scroll-cue" href="#project-overview" onClick={handleClick}>
+    <a className="case-scroll-cue" href={`#${targetId}`} onClick={handleClick}>
       <span>Scroll to explore</span>
       <span className="case-scroll-arrow" aria-hidden="true">↓</span>
     </a>

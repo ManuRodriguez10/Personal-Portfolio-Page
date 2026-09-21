@@ -70,32 +70,35 @@ export function ProjectsShowcase({ projects }: { projects: Project[] }) {
   const remaining = projects.filter((project) => !featuredIds.has(project.id))
 
   return (
-    <section className="projects-collection" aria-labelledby="featured-work-heading">
-      <div className="projects-container">
-        <WorkReveal className="featured-heading">
-          <p className="projects-section-label">FEATURED WORK</p>
-          <h2 id="featured-work-heading">Projects built from problem to deployment.</h2>
-        </WorkReveal>
+    <>
+      <section className="projects-featured-section" aria-labelledby="featured-work-heading">
+        <div className="projects-container">
+          <WorkReveal className="featured-heading">
+            <h2 id="featured-work-heading" className="projects-section-heading">Featured Projects</h2>
+          </WorkReveal>
 
-        <div className="featured-projects">
-          {featured.map((project, index) => (
-            <WorkReveal key={project.id}>
-              <article className={`featured-project ${index === 1 ? "featured-project-reversed" : ""}`}>
-                <div className="featured-project-info">
-                  <ProjectMeta project={project} />
-                  <h3>{project.title}</h3>
-                  <p className="featured-project-description">{featuredDescriptions[project.id]}</p>
-                  <p className="featured-project-tech">{project.tech.join(" · ")}</p>
-                  <ProjectLinks project={project} />
-                </div>
-                <ProjectPreview project={project} featured />
-              </article>
-            </WorkReveal>
-          ))}
+          <div className="featured-projects">
+            {featured.map((project, index) => (
+              <WorkReveal key={project.id} delay={index * 100}>
+                <article className={`featured-project ${index === 1 ? "featured-project-reversed" : ""}`}>
+                  <div className="featured-project-info">
+                    <ProjectMeta project={project} />
+                    <h3>{project.title}</h3>
+                    <p className="featured-project-description">{featuredDescriptions[project.id]}</p>
+                    <p className="featured-project-tech">{project.tech.join(" · ")}</p>
+                    <ProjectLinks project={project} />
+                  </div>
+                  <ProjectPreview project={project} featured />
+                </article>
+              </WorkReveal>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="more-projects">
-          <WorkReveal><h2>More projects</h2></WorkReveal>
+      <section className="more-projects" aria-labelledby="more-projects-heading">
+        <div className="projects-container">
+          <WorkReveal><h2 id="more-projects-heading" className="projects-section-heading more-projects-heading">More Projects</h2></WorkReveal>
           <div className="more-projects-grid">
             {remaining.map((project, index) => (
               <WorkReveal key={project.id} delay={(index % 2) * 80}>
@@ -111,7 +114,7 @@ export function ProjectsShowcase({ projects }: { projects: Project[] }) {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

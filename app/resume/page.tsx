@@ -1,6 +1,5 @@
-import Link from "next/link"
 import { Geist, Geist_Mono } from "next/font/google"
-import { Contact } from "@/components/contact"
+import { ScrollCue } from "@/components/scroll-cue"
 import { WorkReveal } from "@/components/work-reveal"
 import "./resume.css"
 
@@ -47,41 +46,17 @@ const experiences = [
   },
 ]
 
-const selectedProjects = [
-  {
-    category: "CAPSTONE PROJECT",
-    title: "MatchFit",
-    description: "A soccer team management platform for coaches and players, with role-based dashboards, team and roster management, event scheduling, and an interactive matchday lineup builder.",
-    stack: "REACT · VITE · SUPABASE · POSTGRESQL · TAILWIND CSS · RADIX UI",
-    href: "/projects/matchfit",
-  },
-  {
-    category: "MOBILE APPLICATION",
-    title: "MatchFit Mobile",
-    description: "A React Native version of the MatchFit platform that brings its connected soccer experience to smartphones using Supabase and Firebase-backed services.",
-    stack: "REACT NATIVE · SUPABASE · FIREBASE",
-    href: "/projects/matchfit-mobile",
-  },
-  {
-    category: "ACADEMIC PROJECT",
-    title: "Scent Society",
-    description: "A full-stack e-commerce application built with React and Django for fragrance discovery, authenticated shopping, real-time cart management, and a multi-step checkout experience.",
-    stack: "REACT · VITE · DJANGO · POSTGRESQL · JWT · TAILWIND CSS",
-    href: "/projects/scent-society",
-  },
-]
-
 const skillGroups = [
-  { label: "LANGUAGES", skills: ["JavaScript", "Python", "Java", "SQL", "HTML", "CSS"] },
-  { label: "FRONTEND", skills: ["React", "Vite", "Tailwind CSS", "Radix UI"] },
-  { label: "BACKEND", skills: ["Django", "Django REST Framework", "Supabase", "REST APIs"] },
-  { label: "DATABASES & AUTH", skills: ["PostgreSQL", "Supabase Auth", "JWT Authentication", "Row-Level Security"] },
-  { label: "TOOLS & WORKFLOW", skills: ["Google Workspace", "Microsoft Office Suite"] },
+  { label: "LANGUAGES", skills: ["JavaScript", "TypeScript", "Python", "Java", "SQL", "HTML", "CSS"] },
+  { label: "FRONTEND", skills: ["React", "Next.js", "Vue.js", "Vite", "Tailwind CSS", "Radix UI", "Framer Motion", "JavaFX"] },
+  { label: "BACKEND & APIs", skills: ["Django", "Django REST Framework", "Supabase", "REST APIs", "OpenAI API"] },
+  { label: "DATA & AUTHENTICATION", skills: ["PostgreSQL", "Firebase / Firestore", "Supabase Auth", "JWT Authentication", "Row-Level Security"] },
+  { label: "TOOLS & DEPLOYMENT", skills: ["Git", "GitHub", "Vercel", "Netlify"] },
 ]
 
 const education = [
   { dates: "AUG 2023 - MAY 2026", degree: "Bachelor of Science in Computer Science", school: "New College of Florida", location: "Sarasota, Florida" },
-  { dates: "AUG 2022 - MAY 2023", degree: "Associate of Business Management", school: "Bryant & Stratton College", location: "Albany, New York" },
+  { dates: "August 2022 – May 2023", degree: "Business Management Coursework", school: "Bryant & Stratton College", location: "Albany, NY" },
 ]
 
 export default function ResumePage() {
@@ -94,14 +69,14 @@ export default function ResumePage() {
             <h1 id="resume-heading">Experience across software, education, and product development.</h1>
             <p className="resume-hero-copy">I’m Manuel Rodriguez, a full-stack software engineer with experience building web applications, developing AI-powered business tools, and supporting students in software engineering and object-oriented programming.</p>
             <div className="resume-hero-actions">
-              <a className="resume-download-button" href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">Download résumé</a>
-              <Link className="resume-projects-link" href="/projects"><span>View projects</span><span aria-hidden="true">→</span></Link>
+              <a className="resume-download-button" href="/resume.pdf" download="Manuel-Rodriguez-Resume.pdf">Download resume</a>
+              <ScrollCue targetId="experience" />
             </div>
           </WorkReveal>
         </div>
       </section>
 
-      <section className="resume-section resume-experience" aria-labelledby="experience-heading">
+      <section id="experience" className="resume-section resume-experience" aria-labelledby="experience-heading">
         <div className="resume-container">
           <WorkReveal className="resume-section-intro">
             <p className="resume-label">EXPERIENCE</p>
@@ -110,11 +85,13 @@ export default function ResumePage() {
           <div className="resume-rows">
             {experiences.map((experience, index) => (
               <WorkReveal key={experience.title} delay={index * 80}>
-                <article className="resume-row">
-                  <p className="resume-date">{experience.dates}</p>
-                  <div className="resume-row-content">
+                <article className="resume-row resume-experience-row">
+                  <div className="resume-experience-meta">
+                    <p className="resume-date">{experience.dates}</p>
                     <h3>{experience.title}</h3>
                     <p className="resume-organization">{experience.organization}{experience.location && <> · {experience.location}</>}</p>
+                  </div>
+                  <div className="resume-row-content resume-experience-details">
                     <ul>{experience.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
                   </div>
                 </article>
@@ -124,46 +101,20 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <section className="resume-project-section" aria-labelledby="selected-projects-heading">
-        <div className="resume-container">
-          <WorkReveal className="resume-section-intro">
-            <p className="resume-label resume-label-navy">SELECTED PROJECTS</p>
-            <h2 id="selected-projects-heading">Products developed from idea to implementation.</h2>
-          </WorkReveal>
-          <div className="resume-project-list">
-            {selectedProjects.map((project, index) => (
-              <WorkReveal key={project.title} delay={index * 80}>
-                <article className="resume-project-row">
-                  <p className="resume-project-category">{project.category}</p>
-                  <div className="resume-project-details">
-                    <h3>{project.title}</h3>
-                    <p className="resume-project-description">{project.description}</p>
-                    <p className="resume-project-stack">{project.stack}</p>
-                    <Link className="resume-case-link" href={project.href}><span>View case study</span><span aria-hidden="true">→</span></Link>
-                  </div>
-                </article>
-              </WorkReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="resume-section resume-skills" aria-labelledby="skills-heading">
-        <div className="resume-container">
+        <div className="resume-container resume-skills-layout">
           <WorkReveal className="resume-section-intro">
             <p className="resume-label">TECHNICAL SKILLS</p>
             <h2 id="skills-heading">Tools used to build complete products.</h2>
           </WorkReveal>
-          <div className="resume-skills-grid">
-            {skillGroups.map((group, index) => (
-              <WorkReveal key={group.label} delay={(index % 4) * 70}>
-                <article className="resume-skill-group">
-                  <h3>{group.label}</h3>
-                  <ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
-                </article>
-              </WorkReveal>
+          <WorkReveal className="resume-skills-grid" delay={80}>
+            {skillGroups.map((group) => (
+              <article className="resume-skill-group" key={group.label}>
+                <h3>{group.label}</h3>
+                <ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+              </article>
             ))}
-          </div>
+          </WorkReveal>
         </div>
       </section>
 
@@ -196,7 +147,6 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <Contact />
     </div>
   )
 }

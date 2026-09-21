@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google"
 import type { Project } from "./project-card"
 import { ProjectImageCarousel } from "./project-image-carousel"
 import { WorkReveal } from "./work-reveal"
-import { Contact } from "./contact"
 import { ScrollCue } from "./scroll-cue"
 import "./case-study.css"
 
@@ -160,7 +159,6 @@ export function CaseStudyLayout({ project }: { project: Project }) {
           </div>
         </div>
       </section>
-      <Contact />
     </div>
   )
 }

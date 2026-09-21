@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { projects } from "@/lib/data"
 import { WorkReveal } from "./work-reveal"
 import insuranceScreenshot from "@/public/assets/insurance-payment-1.png"
-import matchfitScreenshot from "@/public/assets/matchfit-3.png"
+import matchfitMobileScreenshot from "@/public/assets/matchfit-mobile-hero.png"
 import "./selected-work.css"
 
 const sans = Geist({ subsets: ["latin"], variable: "--work-sans" })
@@ -19,11 +19,11 @@ const selectedProjects = [
     alt: "Insurance payment receipt automation system interface",
   },
   {
-    id: "matchfit",
-    description: "A soccer team management platform that helps coaches manage rosters, schedule games, and build and publish matchday lineups through a soccer-specific workflow.",
-    stack: "React · Supabase · PostgreSQL",
-    screenshot: matchfitScreenshot,
-    alt: "MatchFit soccer team management interface",
+    id: "matchfit-mobile",
+    description: "A mobile version of the MatchFit platform that brings its soccer experience to smartphones through a connected application for players and teams.",
+    stack: "React Native · Supabase · Firebase",
+    screenshot: matchfitMobileScreenshot,
+    alt: "Person holding a phone displaying the MatchFit Mobile application",
   },
 ]
 
@@ -48,11 +48,6 @@ export function SelectedWork() {
                   <p className="selected-work-stack">{selected.stack}</p>
                   <div className="selected-work-links">
                     <Link href={`/projects/${project.id}`}><span>View case study</span><span className="selected-work-arrow" aria-hidden="true">→</span></Link>
-                    {project.id === "matchfit" && project.deploymentUrl && (
-                      <a href={project.deploymentUrl} target="_blank" rel="noopener noreferrer">
-                        <span>Live project</span><span className="selected-work-arrow" aria-hidden="true">↗</span>
-                      </a>
-                    )}
                   </div>
                 </div>
                 <div className="selected-work-screenshot">

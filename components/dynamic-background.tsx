@@ -22,7 +22,7 @@ const AMBIENT_SHAPES = [
 
 export function DynamicBackground({ variant = "aurora" }: DynamicBackgroundProps) {
   const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number | null>(null)
   const posRef = useRef({ x: 0.5, y: 0.5 })
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function DynamicBackground({ variant = "aurora" }: DynamicBackgroundProps
       if (rafRef.current != null) return
       rafRef.current = requestAnimationFrame(() => {
         setMouse(posRef.current)
-        rafRef.current = undefined
+        rafRef.current = null
       })
     }
     const onLeave = () => setMouse(null)
